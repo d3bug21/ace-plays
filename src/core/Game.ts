@@ -19,6 +19,8 @@ import { BlasterRig, BLASTERS, blasterDef } from '../gameplay/Blasters';
 import { UI, type StageCardData } from '../ui/UI';
 import { MenuScene } from '../ui/MenuScene';
 import { TouchControls } from '../ui/Touch';
+import { RotatePrompt, showInAppTip } from '../ui/RotatePrompt';
+import { detectDevice, type DeviceInfo } from './Device';
 import { STAGES, stageIndex } from '../stages';
 import type { Stage, StageContext, PooledLight } from '../stages/types';
 import { disposeTree } from '../kit/kit';
@@ -121,6 +123,10 @@ export class Game {
   private firingFlash = 0;
   private ready = false;
   private touch: TouchControls | null = null;
+  readonly device: DeviceInfo;
+  private rotate: RotatePrompt | null = null;
+  private lastRotateLine = -999;
+  private uiRoot: HTMLElement;
 
   constructor(container: HTMLElement, probe: boolean) {
     this.probe = probe;
@@ -132,6 +138,8 @@ export class Game {
     const uiRoot = document.createElement('div');
     uiRoot.id = 'ui';
     container.appendChild(uiRoot);
+    this.uiRoot = uiRoot;
+    this.device = detectDevice();
 
     this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: true, powerPreference: 'high-performance', preserveDrawingBuffer: probe });
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -199,7 +207,18 @@ export class Game {
       };
       this.syncTouch();
     };
-    if (window.matchMedia?.('(pointer: coarse)').matches) setupTouch();
+    if (!probe && (this.device.touchPrimary || window.matchMedia?.('(pointer: coarse)').matches)) setupTouch();
+    // Phones/tablets: friendly "turn sideways" helper (never on desktop or in the desktop app).
+    if (!probe && this.device.handheld && !this.device.desktopApp) {
+      this.rotate = new RotatePrompt(uiRoot, this.device);
+      this.rotate.onShow = () => {
+        if (this.state === 'playing') this.pause();
+        if (this.audio.ready && this.time - this.lastRotateLine > 25) {
+          this.lastRotateLine = this.time;
+          this.audio.voice('ace_rotate', { priority: 1, dropIfBusy: true });
+        }
+      };
+    }
     window.addEventListener('touchstart', setupTouch, { once: true, passive: true });
     window.addEventListener('resize', () => this.resize());
     this.resize();
@@ -276,6 +295,7 @@ export class Game {
     this.state = 'boot';
     this.ui.showBoot(() => {
       this.audio.unlock();
+      this.tryLandscapeLock();
       this.audio.setVolumes(this.save.settings.musicVolume, this.save.settings.voiceVolume, this.save.settings.sfxVolume);
       void this.audio.preload(['common']);
       this.audio.playMusic('mus_title');
@@ -284,8 +304,29 @@ export class Game {
     });
   }
 
+  /** Android Chrome & co: go full screen and prefer landscape (silently ignored where unsupported). */
+  private tryLandscapeLock(): void {
+    const d = this.device;
+    if (!d.handheld || d.desktopApp || d.ios || !document.fullscreenEnabled) return;
+    try {
+      const el = document.documentElement;
+      void el
+        .requestFullscreen({ navigationUI: 'hide' })
+        .then(() => (screen.orientation as unknown as { lock?: (o: string) => Promise<void> })?.lock?.('landscape'))
+        .catch(() => undefined);
+    } catch {
+      /* not supported */
+    }
+  }
+
+  private inAppTipShown = false;
+
   showTitle(): void {
     this.state = 'title';
+    if (!this.inAppTipShown) {
+      this.inAppTipShown = true;
+      showInAppTip(this.uiRoot, this.device);
+    }
     this.menu.setView('title');
     this.audio.playMusic('mus_title');
     this.audio.playAmbience(null);

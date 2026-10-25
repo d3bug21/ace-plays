@@ -432,3 +432,48 @@ input[type='range']:focus-visible { outline: 3px solid var(--butter); outline-of
   body.touch .banner { top: 30%; width: calc(100vw - 24px); }
   body.touch .timer { top: 140px; }
 }
+
+/* ------------------------------------------------------------ rotate prompt (phones/tablets only) */
+.rotate-prompt { position: fixed; inset: 0; z-index: 80; display: none; align-items: center; justify-content: center; padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left)); background: radial-gradient(120% 90% at 50% 35%, #6fa8a3 0%, #2f625d 100%); pointer-events: auto; }
+.rotate-prompt.show { display: flex; animation: rpIn 0.35s ease both; }
+@keyframes rpIn { from { opacity: 0; } to { opacity: 1; } }
+.rp-card { width: min(380px, 100%); text-align: center; color: var(--cream); display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.rp-card h2 { margin: 0; font-size: clamp(1.7rem, 7vw, 2.3rem); line-height: 1.05; text-shadow: 0 3px 0 rgba(31, 66, 62, 0.6); }
+.rp-card p { margin: 0 0 6px; font-size: 1.12rem; line-height: 1.4; opacity: 0.95; }
+.rp-art { width: min(260px, 70vw); }
+.rp-svg { width: 100%; height: auto; overflow: visible; }
+.rp-phone { transform-box: fill-box; transform-origin: center; animation: rpTurn 3.2s cubic-bezier(0.5, 0, 0.3, 1) infinite; }
+@keyframes rpTurn { 0%, 18% { transform: rotate(0deg); } 45%, 80% { transform: rotate(90deg); } 100% { transform: rotate(0deg); } }
+.rp-ace { transform-box: fill-box; transform-origin: center bottom; animation: rpBob 1.6s ease-in-out infinite; }
+@keyframes rpBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+.rp-wave { transform-box: fill-box; transform-origin: left bottom; animation: rpWave 0.8s ease-in-out infinite alternate; }
+@keyframes rpWave { from { transform: rotate(-12deg); } to { transform: rotate(16deg); } }
+.rp-arrow { animation: rpArrow 3.2s ease-in-out infinite; }
+@keyframes rpArrow { 0%, 15% { opacity: 0.2; } 30%, 60% { opacity: 1; } 85%, 100% { opacity: 0.2; } }
+.rotate-prompt .btn { margin-top: 4px; }
+
+.inapp-tip { position: absolute; left: 50%; top: max(12px, env(safe-area-inset-top)); transform: translateX(-50%); width: min(520px, calc(100vw - 24px)); display: flex; align-items: center; gap: 10px; padding: 10px 10px 10px 14px; font-size: 0.95rem; line-height: 1.35; z-index: 40; }
+.inapp-tip svg { width: 22px; height: 22px; flex: none; color: var(--teal); }
+.inapp-tip .icon-btn { width: 36px; height: 36px; flex: none; box-shadow: none; background: var(--cream-2); }
+.inapp-tip .icon-btn svg { width: 18px; height: 18px; color: var(--ink); }
+
+/* ------------------------------------------------------------ compact objectives on touch screens */
+.obj-toggle { display: none; }
+body.touch #ui .hud .objectives { pointer-events: auto; z-index: 6; cursor: pointer; top: max(10px, env(safe-area-inset-top)); left: max(10px, env(safe-area-inset-left)); width: auto; max-width: min(340px, calc(100vw - 190px)); padding: 7px 12px; gap: 4px; }
+body.touch .objectives .obj-stage, body.touch .objectives .obj-sep, body.touch .objectives .obj:not(.main) { display: none; }
+body.touch .objectives.expanded .obj-stage, body.touch .objectives.expanded .obj-sep { display: flex; }
+body.touch .objectives.expanded .obj-sep { display: block; }
+body.touch .objectives.expanded .obj:not(.main) { display: flex; }
+body.touch .objectives .obj.main { font-size: 0.95rem; gap: 8px; }
+body.touch .objectives .obj svg { width: 20px; height: 20px; }
+body.touch .objectives .obj .count { font-size: 0.82rem; padding: 1px 8px; }
+body.touch .obj-toggle { display: grid; place-items: center; position: absolute; right: -9px; bottom: -9px; width: 22px; height: 22px; border-radius: 50%; background: var(--teal); color: #fff; font-size: 0.8rem; font-weight: 700; box-shadow: 0 2px 6px rgba(28, 40, 46, 0.25); }
+body.touch .obj-toggle .ex { display: none; }
+body.touch .objectives.expanded .obj-toggle .ex { display: block; }
+body.touch .objectives.expanded .obj-toggle .co { display: none; }
+body.touch .stars-hud { top: max(10px, env(safe-area-inset-top)); right: max(10px, env(safe-area-inset-right)); padding: 6px 10px; }
+body.touch .stars-hud svg { width: 22px; height: 22px; }
+body.touch .blaster-bar { bottom: max(8px, env(safe-area-inset-bottom)); }
+body.touch .tbtn.fire, body.touch .tbtn.jump, body.touch .tbtn.down, body.touch .tbtn.swap { margin-right: env(safe-area-inset-right); margin-bottom: env(safe-area-inset-bottom); }
+body.touch .tbtn.tpause { top: max(64px, calc(env(safe-area-inset-top) + 56px)); right: max(16px, env(safe-area-inset-right)); margin-right: 0; width: 44px; height: 44px; }
+body.touch .touch-zone.left { left: env(safe-area-inset-left); }

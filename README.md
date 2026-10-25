@@ -5,6 +5,10 @@ boy explorer with a backpack full of playful blasters that blow wobbly bubbles a
 bouncy balls. Nobody ever gets hurt. Bubbled critters float away in a happy bubble, booped
 sharks do a barrel roll, and targets pop into soft sparkles.
 
+### ▶ [Play in your browser](https://ace-plays.ace-plays.workers.dev)
+
+Works on computers, tablets and phones (turn your phone sideways for the best view). Prefer a desktop app? Grab one from the [latest release](https://github.com/d3bug21/ace-plays/releases/latest).
+
 ![Ace Plays! title screen](docs/screenshots/title.png)
 
 Explore five worlds:
@@ -43,6 +47,12 @@ blasters: the **Bubble Wand**, **Boing Ball**, **Fizz Fountain** and **Glow Ball
 | Pause | `Esc` or `P` |
 | Hints on/off | `H` |
 
+**On phones and tablets:** turn your device sideways for the best view. A friendly reminder pops
+up in portrait, and you can tap **Play anyway**. Drag on the left side to walk, drag on the right
+side to look, and use the on-screen buttons to blow bubbles, jump and swap blasters. Tap the goals
+card to see all your goals. You can also add Ace Plays! to your home screen: it launches full
+screen like an app, and once loaded it keeps working offline.
+
 Ace always moves the way he is looking, even when swimming. The **Settings** menu has mouse
 sensitivity, an **Invert look up/down** option, separate **Music**, **Voices** and **Effects**
 volume sliders, subtitles, head bob, field of view and a graphics quality switch.
@@ -60,6 +70,17 @@ npm run electron:start # build, then open the desktop app window
 
 `npm run build:web` type-checks the code and writes a plain static website to `dist/`.
 You can open it with any static file server. It also works as the desktop app's renderer.
+
+### Web version
+
+The browser version is hosted on Cloudflare Workers (static assets). `wrangler.jsonc` points
+at `dist/`, so publishing an update is:
+
+```bash
+ELECTRON_SKIP_BINARY_DOWNLOAD=1 npm ci
+npm run build:web
+npx wrangler deploy
+```
 
 ### Desktop packages
 

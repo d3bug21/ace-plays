@@ -316,6 +316,15 @@
    "file": "audio/voice/ace_bigbubble.mp3"
   },
   {
+   "id": "ace_rotate",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Turn your phone sideways! It's heaps more fun, eh!",
+   "tts": "Turn your phone sideways! It's heaps more fun, eh!",
+   "file": "audio/voice/ace_rotate.mp3"
+  },
+  {
    "id": "nar_title",
    "kind": "voice",
    "speaker": "narrator",

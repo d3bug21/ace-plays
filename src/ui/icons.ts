@@ -76,11 +76,22 @@ const ICONS: Record<string, string> = {
   trophy: S(`<path d="M10 5h12v6a6 6 0 0 1-12 0z" ${FS}/><path d="M10 7H6a4 4 0 0 0 4 5M22 7h4a4 4 0 0 1-4 5M16 17v5M11 27h10M12 22h8v5h-8z"/>`),
   space: S(`<rect x="3" y="11" width="26" height="10" rx="3" ${FS}/>`),
   wasd: S(`<rect x="12" y="4" width="8" height="8" rx="2"/><rect x="3" y="14" width="8" height="8" rx="2"/><rect x="12" y="14" width="8" height="8" rx="2"/><rect x="21" y="14" width="8" height="8" rx="2"/>`),
+  tap: S(`<path d="M13 17V7.5a2 2 0 0 1 4 0V15l5.2 1.3a2.5 2.5 0 0 1 1.8 2.9L23 25.5a3 3 0 0 1-3 2.5h-5.2a3 3 0 0 1-2.4-1.2L8.6 21.7a1.8 1.8 0 0 1 2.7-2.4z" ${FS}/><path d="M10 6.5a5 5 0 0 1 10 0"/>`),
+  drag: S(`<path d="M13 18V9.5a2 2 0 0 1 4 0V16l5 1.2a2.4 2.4 0 0 1 1.8 2.8L23 26a2.6 2.6 0 0 1-2.6 2h-5a3 3 0 0 1-2.4-1.2L9.4 22a1.7 1.7 0 0 1 2.6-2.2z" ${FS}/><path d="M4 9h6M4 9l2.5-2.5M4 9l2.5 2.5M26 9h-5M26 9l-2.5-2.5M26 9l-2.5 2.5"/>`),
+  joystick: S(`<circle cx="16" cy="16" r="12" ${FS}/><circle cx="16" cy="16" r="5" ${F}/><path d="M16 3.5v3M16 25.5v3M3.5 16h3M25.5 16h3"/>`),
+  jumpbtn: S(`<circle cx="16" cy="16" r="12" ${FS}/><path d="M16 23V10M10.5 15.5L16 10l5.5 5.5"/>`),
   arrows: S(`<path d="M16 4l-4 5h8zM16 28l-4-5h8zM4 16l5-4v8zM28 16l-5-4v8z" ${F}/>`),
 };
 
 export function icon(name: string): string {
   return ICONS[name] ?? ICONS.dot;
+}
+
+/** Swap keyboard/mouse glyphs for touch glyphs on touch screens. */
+export function inputIcon(name: string, touch: boolean): string {
+  if (!touch) return name;
+  const map: Record<string, string> = { mouse: 'drag', keyboard: 'tap', wasd: 'joystick', arrows: 'joystick', space: 'jumpbtn' };
+  return map[name] ?? name;
 }
 
 export function hasIcon(name: string): boolean {

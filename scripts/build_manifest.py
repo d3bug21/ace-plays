@@ -60,6 +60,7 @@ ace('ace_one_more', 'Just one more!')
 ace('ace_treasure_all', 'I found them all! Heaps good!')
 ace('ace_ding', 'Ding dong! Ha ha!')
 ace('ace_bigbubble', 'A super-duper BIG bubble!')
+ace('ace_rotate', "Turn your phone sideways! It's heaps more fun, eh!")
 
 # ---------------------------------------------------------------- Narrator (common)
 nar('nar_title', 'Ace Plays!', tts='Ace Plays!')

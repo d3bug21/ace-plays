@@ -4344,9 +4344,32 @@
       "attempts": 1,
       "ms": 21472,
       "generated_at": "2026-10-25T09:44:46.695Z"
+    },
+    "audio/voice/ace_rotate.mp3": {
+      "id": "ace_rotate",
+      "kind": "voice",
+      "file": "audio/voice/ace_rotate.mp3",
+      "take": 0,
+      "status": "ok",
+      "bytes": 42048,
+      "frames": 134,
+      "duration": 3.5,
+      "sampleRate": 44100,
+      "avgKbps": 96,
+      "frameCoverage": 1,
+      "endpoint": "/v1/text-to-speech",
+      "model_id": "eleven_v3",
+      "voice_id": "UugOv0gh5mxMla6rl5Tk",
+      "voice_name": "Ace Plays - Ace (Kiwi cartoon hero)",
+      "output_format": "mp3_44100_96",
+      "request_text": "[excited] Turn your phone sideways! It's heaps more fun, eh!",
+      "request_id": "siUaBFyL0NhT7imYE2lu",
+      "attempts": 1,
+      "ms": 5357,
+      "generated_at": "2026-10-25T22:06:37.369Z"
     }
   },
-  "updated_at": "2026-10-25T09:49:26.797Z",
+  "updated_at": "2026-10-25T22:06:37.383Z",
   "voices": {
     "ace": {
       "voice_id": "UugOv0gh5mxMla6rl5Tk",
@@ -4379,9 +4402,9 @@
     "music_model": "music_v2_5"
   },
   "summary": {
-    "expected_files": 193,
-    "present_files": 193,
-    "total_bytes": 14513344,
+    "expected_files": 194,
+    "present_files": 194,
+    "total_bytes": 14555392,
     "errors": [],
     "missing": []
   }

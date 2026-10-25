@@ -1,4 +1,4 @@
-import { icon, renderKeys, escapeHtml } from './icons';
+import { icon, renderKeys, escapeHtml, inputIcon } from './icons';
 import type { SaveData, BlasterId, Settings } from '../core/Save';
 import type { StageInfo, ObjectiveDef } from '../stages/types';
 import type { ObjectiveState } from '../gameplay/Objectives';
@@ -128,7 +128,7 @@ export class UI {
       <div class="title-buttons">
         <button class="btn primary big" data-a="play">${icon('play')} ${o.hasProgress ? 'Keep Playing' : 'Play'}</button>
         <div class="title-row">
-          <button class="btn" data-a="controls">${icon('keyboard')} How to Play</button>
+          <button class="btn" data-a="controls">${icon(this.touchMode ? 'tap' : 'keyboard')} How to Play</button>
           <button class="btn" data-a="settings">${icon('gear')} Settings</button>
           ${this.isDesktop ? `<button class="btn" data-a="quit">${icon('door')} Quit</button>` : ''}
         </div>
@@ -220,7 +220,7 @@ export class UI {
       <div class="world">A new adventure</div>
       <h1>${icon(info.icon)}${escapeHtml(info.name)}</h1>
       <p>${escapeHtml(info.tagline)}</p>
-      <div class="goals">${goals.map((g) => `<div class="goal">${icon(g.icon)} ${escapeHtml(g.label)}</div>`).join('')}</div>
+      <div class="goals">${goals.map((g) => `<div class="goal">${icon(inputIcon(g.icon, this.touchMode))} ${escapeHtml(g.label)}</div>`).join('')}</div>
       <div class="go"><span class="loading-dots">Getting everything ready...</span></div>`;
     this.setScreen(s);
     return {
@@ -332,7 +332,7 @@ export class UI {
         <button class="btn primary" data-a="resume">${icon('play')} Keep playing</button>
         ${o.onFinish ? `<button class="btn" data-a="finish">${icon('home')} Finish stage</button>` : ''}
         <button class="btn" data-a="settings">${icon('gear')} Settings</button>
-        <button class="btn" data-a="controls">${icon('keyboard')} How to play</button>
+        <button class="btn" data-a="controls">${icon(this.touchMode ? 'tap' : 'keyboard')} How to play</button>
         <button class="btn" data-a="restart">${icon('retry')} Start this world again</button>
         <button class="btn" data-a="map">${icon('map')} Back to the map</button>
       </div>`;
@@ -362,9 +362,10 @@ export class UI {
   }
 
   showControls(): void {
+    if (this.touchMode) return this.showTouchControls();
     const m = el('div', 'panel modal');
     const keys = (...k: string[]) => `<div class="keys">${k.map((x) => (x.startsWith('<') ? x : `<span class="kbd">${x}</span>`)).join('')}</div>`;
-    m.innerHTML = `<h2>${icon('keyboard')} How to play</h2>
+    m.innerHTML = `<h2>${icon(this.touchMode ? 'tap' : 'keyboard')} How to play</h2>
       <div class="controls-grid">
         ${keys('<span class="kbd">' + icon('mouse') + '</span>')}<div class="what">Move the mouse to look around</div>
         ${keys('Click')}<div class="what">Blow bubbles / launch balls (hold to keep going)</div>
@@ -382,6 +383,26 @@ export class UI {
     m.querySelector('[data-a=ok]')!.addEventListener('click', () => this.closeModal(bg));
   }
 
+  private showTouchControls(): void {
+    const m = el('div', 'panel modal');
+    const row = (ic: string, label: string, what: string) => `<div class="keys"><span class="kbd">${icon(ic)}</span>${label ? `<span class="kbd">${escapeHtml(label)}</span>` : ''}</div><div class="what">${escapeHtml(what)}</div>`;
+    m.innerHTML = `<h2>${icon('tap')} How to play</h2>
+      <div class="controls-grid">
+        ${row('joystick', 'Left side', 'Drag on the left side to walk (or swim) the way Ace is looking')}
+        ${row('drag', 'Right side', 'Drag on the right side to look around')}
+        ${row('bubble', '', 'Hold the bubble button to blow bubbles or launch balls')}
+        ${row('jumpbtn', 'Jump', 'Jump - underwater it swims up')}
+        ${row('updown', 'Down', 'Underwater: swim down')}
+        ${row('retry', '', 'Swap blasters')}
+        ${row('pause', '', 'Pause')}
+        ${row('star', '', 'Tap the goals card to see all your goals')}
+      </div>
+      <p style="margin:4px 0 0;color:var(--ink-soft)">Turn your device sideways for the best view. Aim near a friend and your shot helps you out!</p>
+      <div class="row"><button class="btn primary" data-a="ok">${icon('check')} Got it!</button></div>`;
+    const bg = this.openModal(m, true);
+    m.querySelector('[data-a=ok]')!.addEventListener('click', () => this.closeModal(bg));
+  }
+
   showSettings(onClose?: Fn): void {
     const s = this.save.settings;
     const m = el('div', 'panel modal');
@@ -394,8 +415,8 @@ export class UI {
       ${desc ? `<div class="desc">${desc}</div>` : ''}</div>`;
     const pct = (v: number) => `${Math.round(v * 100)}%`;
     m.innerHTML = `<h2>${icon('gear')} Settings</h2>
-      ${slider('sensitivity', 'Mouse sensitivity', 'mouse', 0.2, 3, 0.05, (v) => v.toFixed(2) + 'x', 'How fast Ace looks around when you move the mouse.')}
-      ${toggle('invertLook', 'Invert look up/down', 'updown', 'When on, moving the mouse up makes Ace look down. Left and right are never changed.')}
+      ${this.touchMode ? slider('sensitivity', 'Look sensitivity', 'drag', 0.2, 3, 0.05, (v) => v.toFixed(2) + 'x', 'How fast Ace looks around when you drag on the screen.') : slider('sensitivity', 'Mouse sensitivity', 'mouse', 0.2, 3, 0.05, (v) => v.toFixed(2) + 'x', 'How fast Ace looks around when you move the mouse.')}
+      ${toggle('invertLook', 'Invert look up/down', 'updown', this.touchMode ? 'When on, dragging up makes Ace look down. Left and right are never changed.' : 'When on, moving the mouse up makes Ace look down. Left and right are never changed.')}
       ${slider('musicVolume', 'Music volume', 'music', 0, 1, 0.05, pct)}
       ${slider('voiceVolume', 'Voices volume', 'voice', 0, 1, 0.05, pct)}
       ${slider('sfxVolume', 'Effects volume', 'speaker', 0, 1, 0.05, pct)}
@@ -470,6 +491,19 @@ export class UI {
       <div class="banners"></div>`;
     this.root.insertBefore(h, this.root.firstChild);
     this.hud = h;
+    // Touch screens: the goals card is compact; tap it to see every goal for a few seconds.
+    const obj = h.querySelector('.objectives') as HTMLElement;
+    let collapse = 0;
+    const toggle = (e: Event) => {
+      if (!this.touchMode) return;
+      e.preventDefault();
+      e.stopPropagation();
+      obj.classList.toggle('expanded');
+      window.clearTimeout(collapse);
+      if (obj.classList.contains('expanded')) collapse = window.setTimeout(() => obj.classList.remove('expanded'), 6000);
+    };
+    obj.addEventListener('touchstart', toggle, { passive: false });
+    obj.addEventListener('click', toggle);
     for (const k of ['helmet', 'crosshair', 'aim-label', 'objectives', 'stars-hud', 'timer', 'blaster-name', 'blaster-bar', 'hint', 'caption', 'click-to-look', 'cheers', 'banners']) {
       this.hudEls[k] = h.querySelector('.' + k) as HTMLElement;
     }
@@ -492,13 +526,16 @@ export class UI {
     const mains = list.filter((o) => o.def.kind === 'main');
     const allMain = mains.every((o) => o.done);
     const row = (o: ObjectiveState, cls: string) =>
-      `<div class="obj ${cls} ${o.done ? 'done' : ''} ${flashId === o.def.id ? 'flash' : ''}">${o.done ? icon('check') : icon(o.def.icon)}<span>${escapeHtml(o.def.label)}</span>${o.def.target > 1 ? `<span class="count">${o.count}/${o.def.target}</span>` : o.done ? '' : ''}</div>`;
+      `<div class="obj ${cls} ${o.done ? 'done' : ''} ${flashId === o.def.id ? 'flash' : ''}">${o.done ? icon('check') : icon(inputIcon(o.def.icon, this.touchMode))}<span>${escapeHtml(o.def.label)}</span>${o.def.target > 1 ? `<span class="count">${o.count}/${o.def.target}</span>` : o.done ? '' : ''}</div>`;
     let html = `<div class="obj-stage">${icon(stageIcon)} ${escapeHtml(stageName)}</div>`;
     if (current) html += row(current, 'main');
     else if (allMain) html += `<div class="obj main">${icon('home')}<span>Hop into the Home Bubble!</span></div>`;
     const extras = list.filter((o) => o.def.kind !== 'main');
     if (extras.length) html += '<div class="obj-sep"></div>' + extras.map((o) => row(o, '')).join('');
+    const doneExtras = extras.filter((o) => o.done).length;
+    html += `<span class="obj-toggle" aria-hidden="true"><span class="co">+${extras.length - doneExtras > 0 ? extras.length - doneExtras : ''}</span><span class="ex">−</span></span>`;
     box.innerHTML = html;
+    box.setAttribute('aria-label', 'Goals - tap to show all');
   }
 
   setStars(stars: boolean[]): void {
@@ -669,11 +706,18 @@ function touchWording(t: string): string {
     .replace(/Move the \[mouse\] to look around/g, 'Drag on the right side to look around')
     .replace(/\[W\] \[A\] \[S\] \[D\] or the arrow keys/g, 'the joystick on the left')
     .replace(/\[W\] swims where you look/g, 'The joystick swims where you look')
+    .replace(/([Hh]old) \[Click\]/g, '$1 the bubble button')
     .replace(/\[Click\]/g, 'Tap the bubble button')
     .replace(/\[Space\]/g, '[Jump]')
     .replace(/\[Shift\]/g, '[Down]')
     .replace(/Press \[2\] \(or \[Q\] \/ \[E\]\)/g, 'Tap the swap button')
     .replace(/Press \[\d\]/g, 'Tap the swap button')
+    .replace(/\[Q\] \/ \[E\]|\[Q\]|\[E\]/g, '[swap button]')
+    .replace(/\[1\]/g, '[Bubble Wand]')
+    .replace(/\[2\]/g, '[Boing Ball]')
+    .replace(/\[3\]/g, '[Fizz Fountain]')
+    .replace(/\[4\]/g, '[Glow Ball]')
+    .replace(/\[C\]/g, '[Down]')
     .replace(/\[mouse\]/g, 'finger')
     // Plain (non-keycap) wording used in banners and goal hints.
     .replace(/Move the mouse to look around/g, 'Drag on the right side to look around')

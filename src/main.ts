@@ -26,4 +26,10 @@ if (game) {
     else game.start();
   }
   (window as unknown as { __acePlays?: Game }).__acePlays = import.meta.env.DEV ? game : undefined;
+  // Offline support for the web build (versioned per deploy). Never in the desktop app or probe runs.
+  if (import.meta.env.PROD && !probe && !game.device.desktopApp && location.protocol.startsWith('http') && 'serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(() => undefined);
+    });
+  }
 }

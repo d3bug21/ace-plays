@@ -1,0 +1,10 @@
+{
+  // Cloudflare Workers static-assets site for the browser build of Ace Plays!
+  // Build first with `npm run build:web`, then `npx wrangler deploy`.
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "ace-plays",
+  "compatibility_date": "2026-10-26",
+  "assets": {
+    "directory": "./dist"
+  }
+}
