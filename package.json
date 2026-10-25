@@ -1,0 +1,116 @@
+{
+  "name": "ace-plays",
+  "productName": "Ace Plays!",
+  "version": "1.0.0",
+  "description": "Ace Plays! - a kid-friendly bubble and bouncy-ball first-person adventure.",
+  "author": "d3bug21",
+  "license": "MIT",
+  "private": true,
+  "main": "electron/main.cjs",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "typecheck": "tsc --noEmit",
+    "build:web": "tsc --noEmit && vite build",
+    "electron:dev": "electron .",
+    "electron:start": "npm run build:web && electron .",
+    "package:mac": "npm run build:web && electron-builder --mac --publish never",
+    "package:win": "npm run build:web && electron-builder --win --publish never",
+    "package:linux": "npm run build:web && electron-builder --linux --publish never"
+  },
+  "devDependencies": {
+    "@fontsource/fredoka": "^5.3.0",
+    "@types/three": "^0.186.0",
+    "electron": "^45.0.0",
+    "electron-builder": "^26.18.0",
+    "playwright-core": "^1.64.1",
+    "three": "^0.186.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5"
+  },
+  "homepage": "./",
+  "build": {
+    "appId": "com.d3bug21.aceplays",
+    "productName": "Ace Plays!",
+    "executableName": "AcePlays",
+    "artifactName": "AcePlays-${version}-${os}-${arch}.${ext}",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "build/icon.png",
+      "package.json"
+    ],
+    "asar": true,
+    "npmRebuild": false,
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ],
+      "category": "public.app-category.kids-games",
+      "identity": null,
+      "icon": "build/icon.png",
+      "darkModeSupport": true
+    },
+    "dmg": {
+      "title": "Ace Plays!"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "signAndEditExecutable": false,
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "shortcutName": "Ace Plays!"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "tar.gz",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "category": "Game",
+      "icon": "build/icon.png",
+      "synopsis": "A kid-friendly bubble and bouncy-ball adventure"
+    }
+  }
+}

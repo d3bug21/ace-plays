@@ -1,0 +1,1502 @@
+{
+ "entries": [
+  {
+   "id": "ace_woohoo",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Woo-hoo!",
+   "tts": "Woo-hoo!",
+   "file": "audio/voice/ace_woohoo.mp3"
+  },
+  {
+   "id": "ace_yay",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Yaaay!",
+   "tts": "Yaaay!",
+   "file": "audio/voice/ace_yay.mp3"
+  },
+  {
+   "id": "ace_gotit",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Got it! Sweet as!",
+   "tts": "Got it! Sweet as!",
+   "file": "audio/voice/ace_gotit.mp3"
+  },
+  {
+   "id": "ace_awesome",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "That was awesome as!",
+   "tts": "That was awesome as!",
+   "file": "audio/voice/ace_awesome.mp3"
+  },
+  {
+   "id": "ace_letsgo",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Let's go, eh!",
+   "tts": "Let's go, eh!",
+   "file": "audio/voice/ace_letsgo.mp3"
+  },
+  {
+   "id": "ace_bubbletime",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Bubble time!",
+   "tts": "Bubble time!",
+   "file": "audio/voice/ace_bubbletime.mp3"
+  },
+  {
+   "id": "ace_boing",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Boing, boing!",
+   "tts": "Boing, boing!",
+   "file": "audio/voice/ace_boing.mp3"
+  },
+  {
+   "id": "ace_nice",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Sweet as!",
+   "tts": "Sweet as!",
+   "file": "audio/voice/ace_nice.mp3"
+  },
+  {
+   "id": "ace_super",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Choice! Super-duper!",
+   "tts": "Choice! Super-duper!",
+   "file": "audio/voice/ace_super.mp3"
+  },
+  {
+   "id": "ace_hi_buddy",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Kia ora, little buddy!",
+   "tts": "Kia ora, little buddy!",
+   "file": "audio/voice/ace_hi_buddy.mp3"
+  },
+  {
+   "id": "ace_found",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Ooh, I found one!",
+   "tts": "Ooh, I found one!",
+   "file": "audio/voice/ace_found.mp3"
+  },
+  {
+   "id": "ace_yes",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Yes! Good as gold!",
+   "tts": "Yes! Good as gold!",
+   "file": "audio/voice/ace_yes.mp3"
+  },
+  {
+   "id": "ace_hehe",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Hee hee!",
+   "tts": "Hee hee!",
+   "file": "audio/voice/ace_hehe.mp3"
+  },
+  {
+   "id": "ace_wow",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Whoa... far out!",
+   "tts": "Whoa... far out!",
+   "file": "audio/voice/ace_wow.mp3"
+  },
+  {
+   "id": "ace_cool",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Ka pai! So cool!",
+   "tts": "Ka pai! So cool!",
+   "file": "audio/voice/ace_cool.mp3"
+  },
+  {
+   "id": "ace_almost",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Aw, so close! Let's have another go!",
+   "tts": "Aw, so close! Let's have another go!",
+   "file": "audio/voice/ace_almost.mp3"
+  },
+  {
+   "id": "ace_newblaster",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "A new blaster! This is gonna be so fun!",
+   "tts": "A new blaster! This is gonna be so fun!",
+   "file": "audio/voice/ace_newblaster.mp3"
+  },
+  {
+   "id": "ace_three_stars",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Three stars! Best day ever, eh!",
+   "tts": "Three stars! Best day ever, eh!",
+   "file": "audio/voice/ace_three_stars.mp3"
+  },
+  {
+   "id": "ace_two_stars",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Two stars! Woo-hoo!",
+   "tts": "Two stars! Woo-hoo!",
+   "file": "audio/voice/ace_two_stars.mp3"
+  },
+  {
+   "id": "ace_one_star",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "We did it! Yay!",
+   "tts": "We did it! Yay!",
+   "file": "audio/voice/ace_one_star.mp3"
+  },
+  {
+   "id": "ace_whee",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Wheeee!",
+   "tts": "Wheeee!",
+   "file": "audio/voice/ace_whee.mp3"
+  },
+  {
+   "id": "ace_poppop",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Pop, pop, pop!",
+   "tts": "Pop, pop, pop!",
+   "file": "audio/voice/ace_poppop.mp3"
+  },
+  {
+   "id": "ace_thankyou",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Chur! Thanks heaps, friend!",
+   "tts": "Chur! Thanks heaps, friend!",
+   "file": "audio/voice/ace_thankyou.mp3"
+  },
+  {
+   "id": "ace_bye",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "See ya later, friend!",
+   "tts": "See ya later, friend!",
+   "file": "audio/voice/ace_bye.mp3"
+  },
+  {
+   "id": "ace_follow",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Come on, follow me!",
+   "tts": "Come on, follow me!",
+   "file": "audio/voice/ace_follow.mp3"
+  },
+  {
+   "id": "ace_ready_set_go",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Ready... set... go!",
+   "tts": "Ready... set... go!",
+   "file": "audio/voice/ace_ready_set_go.mp3"
+  },
+  {
+   "id": "ace_speedy",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Super speedy! Sweet as!",
+   "tts": "Super speedy! Sweet as!",
+   "file": "audio/voice/ace_speedy.mp3"
+  },
+  {
+   "id": "ace_lookthere",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Ooh, look over there!",
+   "tts": "Ooh, look over there!",
+   "file": "audio/voice/ace_lookthere.mp3"
+  },
+  {
+   "id": "ace_where_next",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Where should we go next?",
+   "tts": "Where should we go next?",
+   "file": "audio/voice/ace_where_next.mp3"
+  },
+  {
+   "id": "ace_lets_play",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Let's play!",
+   "tts": "Let's play!",
+   "file": "audio/voice/ace_lets_play.mp3"
+  },
+  {
+   "id": "ace_happy",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Look, it's stoked!",
+   "tts": "Look, it's stoked!",
+   "file": "audio/voice/ace_happy.mp3"
+  },
+  {
+   "id": "ace_one_more",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Just one more!",
+   "tts": "Just one more!",
+   "file": "audio/voice/ace_one_more.mp3"
+  },
+  {
+   "id": "ace_treasure_all",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "I found them all! Heaps good!",
+   "tts": "I found them all! Heaps good!",
+   "file": "audio/voice/ace_treasure_all.mp3"
+  },
+  {
+   "id": "ace_ding",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "Ding dong! Ha ha!",
+   "tts": "Ding dong! Ha ha!",
+   "file": "audio/voice/ace_ding.mp3"
+  },
+  {
+   "id": "ace_bigbubble",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "common",
+   "text": "A super-duper BIG bubble!",
+   "tts": "A super-duper BIG bubble!",
+   "file": "audio/voice/ace_bigbubble.mp3"
+  },
+  {
+   "id": "nar_title",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "common",
+   "text": "Ace Plays!",
+   "tts": "Ace Plays!",
+   "file": "audio/voice/nar_title.mp3"
+  },
+  {
+   "id": "nar_welcome",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "common",
+   "text": "Kia ora, friend! Ready to play with Ace?",
+   "tts": "Kia ora, friend! Ready to play with Ace?",
+   "file": "audio/voice/nar_welcome.mp3"
+  },
+  {
+   "id": "nar_map",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "common",
+   "text": "Choose where Ace goes next!",
+   "tts": "Choose where Ace goes next!",
+   "file": "audio/voice/nar_map.mp3"
+  },
+  {
+   "id": "nar_stage_clear",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "common",
+   "text": "Stage clear! Ka pai, wonderful job!",
+   "tts": "Stage clear! Ka pai, wonderful job!",
+   "file": "audio/voice/nar_stage_clear.mp3"
+  },
+  {
+   "id": "nar_home_bubble",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "common",
+   "text": "Hop into the Home Bubble whenever you're ready!",
+   "tts": "Hop into the Home Bubble whenever you're ready!",
+   "file": "audio/voice/nar_home_bubble.mp3"
+  },
+  {
+   "id": "nar_one_star",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "common",
+   "text": "One star! Great playing!",
+   "tts": "One star! Great playing!",
+   "file": "audio/voice/nar_one_star.mp3"
+  },
+  {
+   "id": "nar_two_stars",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "common",
+   "text": "Two stars! Fantastic!",
+   "tts": "Two stars! Fantastic!",
+   "file": "audio/voice/nar_two_stars.mp3"
+  },
+  {
+   "id": "nar_three_stars",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "common",
+   "text": "Three stars! You're a superstar!",
+   "tts": "Three stars! You're a superstar!",
+   "file": "audio/voice/nar_three_stars.mp3"
+  },
+  {
+   "id": "nar_new_blaster",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "common",
+   "text": "A brand new blaster is ready to try!",
+   "tts": "A brand new blaster is ready to try!",
+   "file": "audio/voice/nar_new_blaster.mp3"
+  },
+  {
+   "id": "nar_new_world",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "common",
+   "text": "A new world has opened on the map!",
+   "tts": "A new world has opened on the map!",
+   "file": "audio/voice/nar_new_world.mp3"
+  },
+  {
+   "id": "nar_challenge",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "common",
+   "text": "A challenge! Pop them all before the timer runs out!",
+   "tts": "A challenge! Pop them all before the timer runs out!",
+   "file": "audio/voice/nar_challenge.mp3"
+  },
+  {
+   "id": "nar_challenge_rings",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "common",
+   "text": "Swim through every ring as fast as you can!",
+   "tts": "Swim through every ring as fast as you can!",
+   "file": "audio/voice/nar_challenge_rings.mp3"
+  },
+  {
+   "id": "nar_challenge_win",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "common",
+   "text": "You beat the challenge! Hooray!",
+   "tts": "You beat the challenge! Hooray!",
+   "file": "audio/voice/nar_challenge_win.mp3"
+  },
+  {
+   "id": "nar_all_done",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "common",
+   "text": "You visited every world! Ace had the best adventure ever, all thanks to you!",
+   "tts": "You visited every world! Ace had the best adventure ever, all thanks to you!",
+   "file": "audio/voice/nar_all_done.mp3"
+  },
+  {
+   "id": "nar_big_friend",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "common",
+   "text": "Here comes a big, big friend!",
+   "tts": "Here comes a big, big friend!",
+   "file": "audio/voice/nar_big_friend.mp3"
+  },
+  {
+   "id": "nar_treasures",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "common",
+   "text": "You found all the hidden treasures!",
+   "tts": "You found all the hidden treasures!",
+   "file": "audio/voice/nar_treasures.mp3"
+  },
+  {
+   "id": "nar_meadow_intro",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "meadow",
+   "text": "Bubble Park! A sunny day for bubbles, bunnies, and one very fluffy friend.",
+   "tts": "Bubble Park! A sunny day for bubbles, bunnies, and one very fluffy friend.",
+   "file": "audio/voice/nar_meadow_intro.mp3"
+  },
+  {
+   "id": "nar_tut_look",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "meadow",
+   "text": "Move the mouse to look around.",
+   "tts": "Move the mouse to look around.",
+   "file": "audio/voice/nar_tut_look.mp3"
+  },
+  {
+   "id": "nar_tut_move",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "meadow",
+   "text": "Use W, A, S, D, or the arrow keys to walk.",
+   "tts": "Use W, A, S, D, or the arrow keys to walk.",
+   "file": "audio/voice/nar_tut_move.mp3"
+  },
+  {
+   "id": "nar_tut_jump",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "meadow",
+   "text": "Press Space to jump over the log!",
+   "tts": "Press Space to jump over the log!",
+   "file": "audio/voice/nar_tut_jump.mp3"
+  },
+  {
+   "id": "nar_tut_fire",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "meadow",
+   "text": "Click to blow bubbles. Pop the balloons!",
+   "tts": "Click to blow bubbles. Pop the balloons!",
+   "file": "audio/voice/nar_tut_fire.mp3"
+  },
+  {
+   "id": "nar_tut_bunny",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "meadow",
+   "text": "Bubbles are gentle. Try bubbling a bunny!",
+   "tts": "Bubbles are gentle. Try bubbling a bunny!",
+   "file": "audio/voice/nar_tut_bunny.mp3"
+  },
+  {
+   "id": "nar_tut_switch",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "meadow",
+   "text": "You found the Boing Ball! Press 2 to switch blasters.",
+   "tts": "You found the Boing Ball! Press 2 to switch blasters.",
+   "file": "audio/voice/nar_tut_switch.mp3"
+  },
+  {
+   "id": "nar_tut_bell",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "meadow",
+   "text": "Bounce a ball off the big bell!",
+   "tts": "Bounce a ball off the big bell!",
+   "file": "audio/voice/nar_tut_bell.mp3"
+  },
+  {
+   "id": "nar_tut_biscuit",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "meadow",
+   "text": "Biscuit wants to play fetch! Bounce balls near him!",
+   "tts": "Biscuit wants to play fetch! Bounce balls near him!",
+   "file": "audio/voice/nar_tut_biscuit.mp3"
+  },
+  {
+   "id": "ace_meadow_intro",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "meadow",
+   "text": "Bubble Park! My favourite place in the whole wide world!",
+   "tts": "Bubble Park! My favorite place in the whole wide world!",
+   "file": "audio/voice/ace_meadow_intro.mp3"
+  },
+  {
+   "id": "ace_biscuit",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "meadow",
+   "text": "Biscuit! Wanna play fetch, boy?",
+   "tts": "Biscuit! Wanna play fetch, boy?",
+   "file": "audio/voice/ace_biscuit.mp3"
+  },
+  {
+   "id": "ace_biscuit_done",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "meadow",
+   "text": "Good boy, Biscuit! You're good as gold!",
+   "tts": "Good boy, Biscuit! You're good as gold!",
+   "file": "audio/voice/ace_biscuit_done.mp3"
+  },
+  {
+   "id": "ace_bunny",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "meadow",
+   "text": "Aww, a bubble bunny!",
+   "tts": "Aww, a bubble bunny!",
+   "file": "audio/voice/ace_bunny.mp3"
+  },
+  {
+   "id": "sfx_dog_woof",
+   "kind": "sfx",
+   "group": "meadow",
+   "prompt": "happy friendly big fluffy dog giving one playful woof, warm, not aggressive",
+   "file": "audio/sfx/sfx_dog_woof.mp3",
+   "duration": 1.0,
+   "variants": 2
+  },
+  {
+   "id": "sfx_dog_pant",
+   "kind": "sfx",
+   "group": "meadow",
+   "prompt": "happy dog panting excitedly, playful",
+   "file": "audio/sfx/sfx_dog_pant.mp3",
+   "duration": 1.5
+  },
+  {
+   "id": "sfx_duck_quack",
+   "kind": "sfx",
+   "group": "meadow",
+   "prompt": "cute cartoon duck quack, single",
+   "file": "audio/sfx/sfx_duck_quack.mp3",
+   "duration": 0.6,
+   "variants": 2
+  },
+  {
+   "id": "sfx_bunny_squeak",
+   "kind": "sfx",
+   "group": "meadow",
+   "prompt": "tiny cute bunny squeak, soft and adorable",
+   "file": "audio/sfx/sfx_bunny_squeak.mp3",
+   "duration": 0.5
+  },
+  {
+   "id": "amb_meadow",
+   "kind": "ambience",
+   "group": "meadow",
+   "prompt": "gentle sunny park ambience with soft birdsong and a light breeze through leaves, calm, seamless loop",
+   "duration": 22,
+   "loop": true,
+   "file": "audio/ambience/amb_meadow.mp3",
+   "volume": 0.8
+  },
+  {
+   "id": "mus_meadow",
+   "kind": "music",
+   "group": "meadow",
+   "prompt": "cheerful sunny playground music for young children, acoustic guitar, glockenspiel, ukulele, soft handclaps, bouncy and gentle, warm, catchy melody, instrumental",
+   "duration": 75,
+   "loop": true,
+   "file": "audio/music/mus_meadow.mp3"
+  },
+  {
+   "id": "nar_dino_intro",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "dino",
+   "text": "Dino Valley! Friendly dinosaurs, big and small, live here. Can you help them out?",
+   "tts": "Dino Valley! Friendly dinosaurs, big and small, live here. Can you help them out?",
+   "file": "audio/voice/nar_dino_intro.mp3"
+  },
+  {
+   "id": "nar_dino_lulu",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "dino",
+   "text": "Oh no, Lulu the long-neck has the hiccups! Land bubbles on her nose!",
+   "tts": "Oh no, Lulu the long-neck has the hiccups! Land bubbles on her nose!",
+   "file": "audio/voice/nar_dino_lulu.mp3"
+  },
+  {
+   "id": "ace_dino_intro",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "dino",
+   "text": "Whoa! Real dinosaurs! Hi, dinos!",
+   "tts": "Whoa! Real dinosaurs! Hi, dinos!",
+   "file": "audio/voice/ace_dino_intro.mp3"
+  },
+  {
+   "id": "ace_egg",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "dino",
+   "text": "A dino egg! I'll keep it safe!",
+   "tts": "A dino egg! I'll keep it safe!",
+   "file": "audio/voice/ace_egg.mp3"
+  },
+  {
+   "id": "ace_lulu",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "dino",
+   "text": "Lulu has the hiccups! I can help!",
+   "tts": "Lulu has the hiccups! I can help!",
+   "file": "audio/voice/ace_lulu.mp3"
+  },
+  {
+   "id": "ace_lulu_done",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "dino",
+   "text": "Hiccups all gone! Yay, Lulu!",
+   "tts": "Hiccups all gone! Yay, Lulu!",
+   "file": "audio/voice/ace_lulu_done.mp3"
+  },
+  {
+   "id": "ace_chirper",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "dino",
+   "text": "Up you go, little chirper!",
+   "tts": "Up you go, little chirper!",
+   "file": "audio/voice/ace_chirper.mp3"
+  },
+  {
+   "id": "ace_trike",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "dino",
+   "text": "Hee hee, the triceratops is so wiggly!",
+   "tts": "Hee hee, the triceratops is so wiggly!",
+   "file": "audio/voice/ace_trike.mp3"
+  },
+  {
+   "id": "sfx_dino_rumble",
+   "kind": "sfx",
+   "group": "dino",
+   "prompt": "distant gentle friendly dinosaur rumble, low warm and soft, not scary",
+   "file": "audio/sfx/sfx_dino_rumble.mp3",
+   "duration": 2.5
+  },
+  {
+   "id": "sfx_dino_chirp",
+   "kind": "sfx",
+   "group": "dino",
+   "prompt": "small baby dinosaur chirping, cute and birdlike, playful",
+   "file": "audio/sfx/sfx_dino_chirp.mp3",
+   "duration": 0.7,
+   "variants": 3
+  },
+  {
+   "id": "sfx_trike_snort",
+   "kind": "sfx",
+   "group": "dino",
+   "prompt": "friendly triceratops snort and happy grunt, playful and goofy",
+   "file": "audio/sfx/sfx_trike_snort.mp3",
+   "duration": 1.0
+  },
+  {
+   "id": "sfx_longneck_call",
+   "kind": "sfx",
+   "group": "dino",
+   "prompt": "long-necked dinosaur gentle low hooting call, majestic, friendly and musical",
+   "file": "audio/sfx/sfx_longneck_call.mp3",
+   "duration": 2.5
+  },
+  {
+   "id": "sfx_hiccup",
+   "kind": "sfx",
+   "group": "dino",
+   "prompt": "funny cartoon hiccup from a giant friendly creature",
+   "file": "audio/sfx/sfx_hiccup.mp3",
+   "duration": 0.6,
+   "variants": 2
+  },
+  {
+   "id": "sfx_ptero_call",
+   "kind": "sfx",
+   "group": "dino",
+   "prompt": "soft friendly pterodactyl squawk in the distance",
+   "file": "audio/sfx/sfx_ptero_call.mp3",
+   "duration": 1.0
+  },
+  {
+   "id": "sfx_egg_hatch",
+   "kind": "sfx",
+   "group": "dino",
+   "prompt": "small egg cracking open with a tiny happy chirp",
+   "file": "audio/sfx/sfx_egg_hatch.mp3",
+   "duration": 1.0
+  },
+  {
+   "id": "amb_dino",
+   "kind": "ambience",
+   "group": "dino",
+   "prompt": "calm prehistoric jungle ambience, soft insects, distant gentle birds, warm breeze, seamless loop",
+   "duration": 22,
+   "loop": true,
+   "file": "audio/ambience/amb_dino.mp3",
+   "volume": 0.8
+  },
+  {
+   "id": "mus_dino",
+   "kind": "music",
+   "group": "dino",
+   "prompt": "playful friendly prehistoric adventure music for kids, marimba, wooden percussion, soft french horn, bouncy and curious, warm, instrumental",
+   "duration": 75,
+   "loop": true,
+   "file": "audio/music/mus_dino.mp3"
+  },
+  {
+   "id": "nar_coral_intro",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "coral",
+   "text": "Coral Cove! Dive into the sparkly sea with fish, turtles, and a singing whale.",
+   "tts": "Coral Cove! Dive into the sparkly sea with fish, turtles, and a singing whale.",
+   "file": "audio/voice/nar_coral_intro.mp3"
+  },
+  {
+   "id": "nar_coral_swim",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "coral",
+   "text": "Underwater, Space swims up and Shift swims down. Ace swims wherever he looks!",
+   "tts": "Underwater, Space swims up and Shift swims down. Ace swims wherever he looks!",
+   "file": "audio/voice/nar_coral_swim.mp3"
+  },
+  {
+   "id": "nar_coral_whale",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "coral",
+   "text": "Mama Mo the whale is singing! Pop her floating song bubbles!",
+   "tts": "Mama Mo the whale is singing! Pop her floating song bubbles!",
+   "file": "audio/voice/nar_coral_whale.mp3"
+  },
+  {
+   "id": "ace_coral_intro",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "coral",
+   "text": "My bubble helmet lets me breathe underwater! Let's swim!",
+   "tts": "My bubble helmet lets me breathe underwater! Let's swim!",
+   "file": "audio/voice/ace_coral_intro.mp3"
+  },
+  {
+   "id": "ace_shark",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "coral",
+   "text": "Boop! Hee hee, silly shark!",
+   "tts": "Boop! Hee hee, silly shark!",
+   "file": "audio/voice/ace_shark.mp3"
+  },
+  {
+   "id": "ace_turtle",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "coral",
+   "text": "Follow me, little turtle!",
+   "tts": "Follow me, little turtle!",
+   "file": "audio/voice/ace_turtle.mp3"
+  },
+  {
+   "id": "ace_whale",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "coral",
+   "text": "A real whale! And she's singing!",
+   "tts": "A real whale! And she's singing!",
+   "file": "audio/voice/ace_whale.mp3"
+  },
+  {
+   "id": "ace_whale_done",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "coral",
+   "text": "What a beautiful song!",
+   "tts": "What a beautiful song!",
+   "file": "audio/voice/ace_whale_done.mp3"
+  },
+  {
+   "id": "ace_puffer",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "coral",
+   "text": "Puff puff! You look like a balloon!",
+   "tts": "Puff puff! You look like a balloon!",
+   "file": "audio/voice/ace_puffer.mp3"
+  },
+  {
+   "id": "ace_pearl",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "coral",
+   "text": "A pearl! So shiny!",
+   "tts": "A pearl! So shiny!",
+   "file": "audio/voice/ace_pearl.mp3"
+  },
+  {
+   "id": "sfx_whale_song",
+   "kind": "sfx",
+   "group": "coral",
+   "prompt": "humpback whale song, gentle, melodic and calm",
+   "file": "audio/sfx/sfx_whale_song.mp3",
+   "duration": 4.0,
+   "variants": 3
+  },
+  {
+   "id": "sfx_shark_boop",
+   "kind": "sfx",
+   "group": "coral",
+   "prompt": "cute rubbery boop squeak with a tiny happy giggle, cartoon",
+   "file": "audio/sfx/sfx_shark_boop.mp3",
+   "duration": 0.7
+  },
+  {
+   "id": "sfx_puffer_puff",
+   "kind": "sfx",
+   "group": "coral",
+   "prompt": "cartoon puffer fish inflating with a squeaky balloon puff",
+   "file": "audio/sfx/sfx_puffer_puff.mp3",
+   "duration": 0.8
+  },
+  {
+   "id": "sfx_clam_open",
+   "kind": "sfx",
+   "group": "coral",
+   "prompt": "clam shell opening underwater with a soft sparkle chime",
+   "file": "audio/sfx/sfx_clam_open.mp3",
+   "duration": 1.0
+  },
+  {
+   "id": "sfx_ring_through",
+   "kind": "sfx",
+   "group": "coral",
+   "prompt": "swimming through a magic bubble ring, soft sparkly whoosh",
+   "file": "audio/sfx/sfx_ring_through.mp3",
+   "duration": 0.8
+  },
+  {
+   "id": "sfx_turtle_chirp",
+   "kind": "sfx",
+   "group": "coral",
+   "prompt": "tiny cute happy chirp of a baby sea turtle, cartoon",
+   "file": "audio/sfx/sfx_turtle_chirp.mp3",
+   "duration": 0.6
+  },
+  {
+   "id": "amb_underwater",
+   "kind": "ambience",
+   "group": "coral",
+   "prompt": "calm underwater ambience, soft bubbles, gentle muffled ocean movement, peaceful, seamless loop",
+   "duration": 22,
+   "loop": true,
+   "file": "audio/ambience/amb_underwater.mp3",
+   "volume": 0.9
+  },
+  {
+   "id": "mus_coral",
+   "kind": "music",
+   "group": "coral",
+   "prompt": "dreamy playful underwater music for children, vibraphone, soft harp, gentle synth pads, light bubbly percussion, calm and catchy, instrumental",
+   "duration": 75,
+   "loop": true,
+   "file": "audio/music/mus_coral.mp3"
+  },
+  {
+   "id": "nar_trench_intro",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "trench",
+   "text": "Twilight Trench! Deep, deep down, where tiny lights glow in the dark.",
+   "tts": "Twilight Trench! Deep, deep down, where tiny lights glow in the dark.",
+   "file": "audio/voice/nar_trench_intro.mp3"
+  },
+  {
+   "id": "nar_trench_glim",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "trench",
+   "text": "Glim the angler fish knows the way. Stay close to her little light!",
+   "tts": "Glim the angler fish knows the way. Stay close to her little light!",
+   "file": "audio/voice/nar_trench_glim.mp3"
+  },
+  {
+   "id": "nar_trench_ollie",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "trench",
+   "text": "Someone shy is peeking out! Tickle Ollie's arms with bubbles!",
+   "tts": "Someone shy is peeking out! Tickle Ollie's arms with bubbles!",
+   "file": "audio/voice/nar_trench_ollie.mp3"
+  },
+  {
+   "id": "ace_trench_intro",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "trench",
+   "text": "It's really dark down here... but I've got my glow balls!",
+   "tts": "It's really dark down here... but I've got my glow balls!",
+   "file": "audio/voice/ace_trench_intro.mp3"
+  },
+  {
+   "id": "ace_glim",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "trench",
+   "text": "Lead the way, little light!",
+   "tts": "Lead the way, little light!",
+   "file": "audio/voice/ace_glim.mp3"
+  },
+  {
+   "id": "ace_lantern",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "trench",
+   "text": "It's glowing! So pretty!",
+   "tts": "It's glowing! So pretty!",
+   "file": "audio/voice/ace_lantern.mp3"
+  },
+  {
+   "id": "ace_ollie",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "trench",
+   "text": "Hi, Ollie! Don't be shy!",
+   "tts": "Hi, Ollie! Don't be shy!",
+   "file": "audio/voice/ace_ollie.mp3"
+  },
+  {
+   "id": "ace_ollie_done",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "trench",
+   "text": "Ollie is laughing! That's the best sound ever!",
+   "tts": "Ollie is laughing! That's the best sound ever!",
+   "file": "audio/voice/ace_ollie_done.mp3"
+  },
+  {
+   "id": "ace_jelly",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "trench",
+   "text": "Ooh, sparkly jelly!",
+   "tts": "Ooh, sparkly jelly!",
+   "file": "audio/voice/ace_jelly.mp3"
+  },
+  {
+   "id": "sfx_jelly_glow",
+   "kind": "sfx",
+   "group": "trench",
+   "prompt": "soft magical glowing shimmer, like gentle wind chimes underwater",
+   "file": "audio/sfx/sfx_jelly_glow.mp3",
+   "duration": 1.2
+  },
+  {
+   "id": "sfx_octopus_giggle",
+   "kind": "sfx",
+   "group": "trench",
+   "prompt": "big friendly octopus giggling, goofy deep bubbly laugh, cartoon, not scary",
+   "file": "audio/sfx/sfx_octopus_giggle.mp3",
+   "duration": 2.0
+  },
+  {
+   "id": "sfx_angler_ping",
+   "kind": "sfx",
+   "group": "trench",
+   "prompt": "tiny sparkly ping like a little light turning on",
+   "file": "audio/sfx/sfx_angler_ping.mp3",
+   "duration": 0.6
+  },
+  {
+   "id": "amb_trench",
+   "kind": "ambience",
+   "group": "trench",
+   "prompt": "deep sea ambience, very soft low hum, gentle distant whale echoes, calm and dreamy, not scary, seamless loop",
+   "duration": 22,
+   "loop": true,
+   "file": "audio/ambience/amb_trench.mp3",
+   "volume": 0.9
+  },
+  {
+   "id": "mus_trench",
+   "kind": "music",
+   "group": "trench",
+   "prompt": "calm gentle deep sea lullaby for children, celesta, soft warm pads, music box, slow and wondering, cozy not scary, instrumental",
+   "duration": 75,
+   "loop": true,
+   "file": "audio/music/mus_trench.mp3"
+  },
+  {
+   "id": "nar_frosty_intro",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "frosty",
+   "text": "Frosty Peaks! Snowy hills, sliding penguins, and a great big woolly friend.",
+   "tts": "Frosty Peaks! Snowy hills, sliding penguins, and a great big woolly friend.",
+   "file": "audio/voice/nar_frosty_intro.mp3"
+  },
+  {
+   "id": "nar_frosty_bigbubble",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "frosty",
+   "text": "Penguins are too big for little bubbles. Hold the button to blow a BIG bubble!",
+   "tts": "Penguins are too big for little bubbles. Hold the button to blow a BIG bubble!",
+   "file": "audio/voice/nar_frosty_bigbubble.mp3"
+  },
+  {
+   "id": "nar_frosty_woolly",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "frosty",
+   "text": "Woolly the mammoth wants to play! Bounce balls to roll the giant snowball to him!",
+   "tts": "Woolly the mammoth wants to play! Bounce balls to roll the giant snowball to him!",
+   "file": "audio/voice/nar_frosty_woolly.mp3"
+  },
+  {
+   "id": "ace_frosty_intro",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "frosty",
+   "text": "Brrr! It's freezing! Let's go play in the snow!",
+   "tts": "Brrr! It's freezing! Let's go play in the snow!",
+   "file": "audio/voice/ace_frosty_intro.mp3"
+  },
+  {
+   "id": "ace_seal",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "frosty",
+   "text": "Whoa, it's balancing my ball!",
+   "tts": "Whoa, it's balancing my ball!",
+   "file": "audio/voice/ace_seal.mp3"
+  },
+  {
+   "id": "ace_penguin",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "frosty",
+   "text": "Up, up, and away, penguin!",
+   "tts": "Up, up, and away, penguin!",
+   "file": "audio/voice/ace_penguin.mp3"
+  },
+  {
+   "id": "ace_woolly",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "frosty",
+   "text": "Woolly wants to play catch!",
+   "tts": "Woolly wants to play catch!",
+   "file": "audio/voice/ace_woolly.mp3"
+  },
+  {
+   "id": "ace_woolly_done",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "frosty",
+   "text": "What a catch, Woolly!",
+   "tts": "What a catch, Woolly!",
+   "file": "audio/voice/ace_woolly_done.mp3"
+  },
+  {
+   "id": "sfx_penguin_squeak",
+   "kind": "sfx",
+   "group": "frosty",
+   "prompt": "cute penguin squeak and chirp, cartoon",
+   "file": "audio/sfx/sfx_penguin_squeak.mp3",
+   "duration": 0.6,
+   "variants": 3
+  },
+  {
+   "id": "sfx_seal_arf",
+   "kind": "sfx",
+   "group": "frosty",
+   "prompt": "happy playful seal barking arf arf",
+   "file": "audio/sfx/sfx_seal_arf.mp3",
+   "duration": 1.0,
+   "variants": 2
+  },
+  {
+   "id": "sfx_seal_clap",
+   "kind": "sfx",
+   "group": "frosty",
+   "prompt": "seal flippers clapping happily",
+   "file": "audio/sfx/sfx_seal_clap.mp3",
+   "duration": 1.0
+  },
+  {
+   "id": "sfx_mammoth_trumpet",
+   "kind": "sfx",
+   "group": "frosty",
+   "prompt": "friendly woolly mammoth trumpeting cheerfully, playful, not scary",
+   "file": "audio/sfx/sfx_mammoth_trumpet.mp3",
+   "duration": 2.0
+  },
+  {
+   "id": "sfx_snow_poof",
+   "kind": "sfx",
+   "group": "frosty",
+   "prompt": "soft snow poof puff burst",
+   "file": "audio/sfx/sfx_snow_poof.mp3",
+   "duration": 0.6
+  },
+  {
+   "id": "sfx_step_snow",
+   "kind": "sfx",
+   "group": "frosty",
+   "prompt": "single soft footstep crunch in fresh snow",
+   "file": "audio/sfx/sfx_step_snow.mp3",
+   "duration": 0.35,
+   "variants": 3
+  },
+  {
+   "id": "amb_frosty",
+   "kind": "ambience",
+   "group": "frosty",
+   "prompt": "gentle snowy mountain ambience, soft wind, faint distant wind chimes, cozy, seamless loop",
+   "duration": 22,
+   "loop": true,
+   "file": "audio/ambience/amb_frosty.mp3",
+   "volume": 0.8
+  },
+  {
+   "id": "mus_frosty",
+   "kind": "music",
+   "group": "frosty",
+   "prompt": "cozy winter playtime music for kids, sleigh bells, celesta, pizzicato strings, soft flute, gentle and bouncy, instrumental",
+   "duration": 75,
+   "loop": true,
+   "file": "audio/music/mus_frosty.mp3"
+  },
+  {
+   "id": "sfx_bubble_shoot",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "soft playful puff of a single soap bubble blown from a toy bubble wand, short",
+   "file": "audio/sfx/sfx_bubble_shoot.mp3",
+   "duration": 0.4,
+   "variants": 3
+  },
+  {
+   "id": "sfx_bubble_pop",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "crisp tiny soap bubble pop, light, bright and delightful, very short",
+   "file": "audio/sfx/sfx_bubble_pop.mp3",
+   "duration": 0.3,
+   "variants": 4
+  },
+  {
+   "id": "sfx_big_pop",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "big soap bubble popping with a soft sparkly shimmer",
+   "file": "audio/sfx/sfx_big_pop.mp3",
+   "duration": 0.8
+  },
+  {
+   "id": "sfx_bubble_wrap",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "soap bubble stretching and wrapping around something, soft wobbly squish",
+   "file": "audio/sfx/sfx_bubble_wrap.mp3",
+   "duration": 0.8
+  },
+  {
+   "id": "sfx_ball_shoot",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "toy spring launcher softly thwumping out a rubber ball, playful",
+   "file": "audio/sfx/sfx_ball_shoot.mp3",
+   "duration": 0.4
+  },
+  {
+   "id": "sfx_ball_boing",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "bouncy rubber ball boing bounce, cartoon, cheerful, short",
+   "file": "audio/sfx/sfx_ball_boing.mp3",
+   "duration": 0.4,
+   "variants": 3
+  },
+  {
+   "id": "sfx_fizz_shoot",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "short burst of fizzy soda bubbles streaming, sparkling",
+   "file": "audio/sfx/sfx_fizz_shoot.mp3",
+   "duration": 0.5
+  },
+  {
+   "id": "sfx_glow_shoot",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "soft magical whoomp with a gentle chime as a glowing ball launches",
+   "file": "audio/sfx/sfx_glow_shoot.mp3",
+   "duration": 0.6
+  },
+  {
+   "id": "sfx_glow_light",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "warm magical chime as a lantern lights up, gentle shimmer",
+   "file": "audio/sfx/sfx_glow_light.mp3",
+   "duration": 1.2
+  },
+  {
+   "id": "sfx_charge",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "rising soft bubbly whoosh, building up, magical",
+   "file": "audio/sfx/sfx_charge.mp3",
+   "duration": 1.0
+  },
+  {
+   "id": "sfx_collect",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "bright cheerful collectible chime, short sparkling arpeggio",
+   "file": "audio/sfx/sfx_collect.mp3",
+   "duration": 0.8
+  },
+  {
+   "id": "sfx_star",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "magical star earned twinkle jingle, short and happy",
+   "file": "audio/sfx/sfx_star.mp3",
+   "duration": 1.5
+  },
+  {
+   "id": "sfx_objective",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "happy short success jingle on xylophone and chimes",
+   "file": "audio/sfx/sfx_objective.mp3",
+   "duration": 1.5
+  },
+  {
+   "id": "sfx_unlock",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "joyful short fanfare for unlocking a new toy, xylophone and soft brass, kid friendly",
+   "file": "audio/sfx/sfx_unlock.mp3",
+   "duration": 2.5
+  },
+  {
+   "id": "sfx_ui_click",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "soft rounded UI click like a wooden toy tap",
+   "file": "audio/sfx/sfx_ui_click.mp3",
+   "duration": 0.2,
+   "volume": 0.7
+  },
+  {
+   "id": "sfx_ui_hover",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "very soft subtle bubbly UI tick",
+   "file": "audio/sfx/sfx_ui_hover.mp3",
+   "duration": 0.15,
+   "volume": 0.4
+  },
+  {
+   "id": "sfx_ui_back",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "soft gentle UI back swoosh",
+   "file": "audio/sfx/sfx_ui_back.mp3",
+   "duration": 0.3,
+   "volume": 0.6
+  },
+  {
+   "id": "sfx_whoosh",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "gentle airy transition whoosh with a few bubbles",
+   "file": "audio/sfx/sfx_whoosh.mp3",
+   "duration": 1.0
+  },
+  {
+   "id": "sfx_jump",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "light cartoon hop jump sound",
+   "file": "audio/sfx/sfx_jump.mp3",
+   "duration": 0.3,
+   "volume": 0.6
+  },
+  {
+   "id": "sfx_land",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "soft thump of sneakers landing on grass",
+   "file": "audio/sfx/sfx_land.mp3",
+   "duration": 0.3,
+   "volume": 0.6
+  },
+  {
+   "id": "sfx_step_grass",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "single soft footstep of a child sneaker on grass",
+   "file": "audio/sfx/sfx_step_grass.mp3",
+   "duration": 0.3,
+   "variants": 3,
+   "volume": 0.45
+  },
+  {
+   "id": "sfx_swim",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "gentle underwater swimming stroke swoosh",
+   "file": "audio/sfx/sfx_swim.mp3",
+   "duration": 0.8,
+   "volume": 0.6
+  },
+  {
+   "id": "sfx_splash",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "small playful water splash",
+   "file": "audio/sfx/sfx_splash.mp3",
+   "duration": 0.6
+  },
+  {
+   "id": "sfx_giggle",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "cute tiny creature giggle, cartoon critter laughing happily",
+   "file": "audio/sfx/sfx_giggle.mp3",
+   "duration": 0.9,
+   "variants": 3
+  },
+  {
+   "id": "sfx_boop",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "cute boop, soft rubbery squeak",
+   "file": "audio/sfx/sfx_boop.mp3",
+   "duration": 0.4
+  },
+  {
+   "id": "sfx_target_pop",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "balloon target popping into soft sparkles, cheerful",
+   "file": "audio/sfx/sfx_target_pop.mp3",
+   "duration": 0.6
+  },
+  {
+   "id": "sfx_bell",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "warm brass playground bell ringing once, pleasant",
+   "file": "audio/sfx/sfx_bell.mp3",
+   "duration": 2.5
+  },
+  {
+   "id": "sfx_countdown",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "soft friendly countdown beep",
+   "file": "audio/sfx/sfx_countdown.mp3",
+   "duration": 0.3
+  },
+  {
+   "id": "sfx_go",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "cheerful go chime",
+   "file": "audio/sfx/sfx_go.mp3",
+   "duration": 0.6
+  },
+  {
+   "id": "sfx_tick",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "soft wooden clock tick",
+   "file": "audio/sfx/sfx_tick.mp3",
+   "duration": 0.2,
+   "volume": 0.5
+  },
+  {
+   "id": "sfx_home_bubble",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "magical portal shimmer with soft wind chimes",
+   "file": "audio/sfx/sfx_home_bubble.mp3",
+   "duration": 2.0
+  },
+  {
+   "id": "sfx_puff_dust",
+   "kind": "sfx",
+   "group": "common",
+   "prompt": "soft playful dust puff poof",
+   "file": "audio/sfx/sfx_puff_dust.mp3",
+   "duration": 0.5
+  },
+  {
+   "id": "mus_title",
+   "kind": "music",
+   "group": "common",
+   "prompt": "cheerful gentle children's adventure theme, ukulele, glockenspiel, soft strings, light percussion, warm, joyful and catchy, 100 bpm, instrumental",
+   "duration": 70,
+   "loop": true,
+   "file": "audio/music/mus_title.mp3"
+  },
+  {
+   "id": "mus_map",
+   "kind": "music",
+   "group": "common",
+   "prompt": "relaxed playful adventure map music for kids, marimba and soft whistled melody, light shaker, curious and happy, instrumental",
+   "duration": 60,
+   "loop": true,
+   "file": "audio/music/mus_map.mp3"
+  },
+  {
+   "id": "mus_results",
+   "kind": "music",
+   "group": "common",
+   "prompt": "happy celebratory short music loop for kids, xylophone, ukulele, handclaps, proud and bright, instrumental",
+   "duration": 30,
+   "loop": true,
+   "file": "audio/music/mus_results.mp3"
+  }
+ ]
+}

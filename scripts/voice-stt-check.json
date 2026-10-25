@@ -1,0 +1,14 @@
+{
+  "checked_at": "2026-10-25T09:49:18.390Z",
+  "threshold": 0.6,
+  "results": [
+    {
+      "id": "ace_hi_buddy",
+      "speaker": "ace",
+      "expected": "Kia ora, little buddy!",
+      "heard": "Kia ora, little buddy",
+      "similarity": 1,
+      "flag": false
+    }
+  ]
+}

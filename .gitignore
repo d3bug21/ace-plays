@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-*/
+release/
+out/
+
+# Caches and temp
+.vite/
+.cache/
+*.log
+.DS_Store
+Thumbs.db
+
+# Secrets - never commit API keys
+.env
+.env.*
+*.key
+*api_key*
+*apikey*
+elevenlabs*.md
