@@ -108,15 +108,20 @@ export class UI {
   showBoot(onStart: Fn): void {
     const s = el('div', 'screen boot');
     s.innerHTML = `<div class="logo-small">Ace Plays<span style="color:var(--butter)">!</span></div><div class="tap">Click anywhere to start</div><div class="loading">Bubbles, bouncy balls and friendly creatures</div>`;
+    let started = false;
     const go = () => {
-      s.removeEventListener('pointerdown', go);
+      if (started) return;
+      started = true;
+      s.removeEventListener('click', go);
       window.removeEventListener('keydown', key);
       onStart();
     };
     const key = (e: KeyboardEvent) => {
       if (e.code === 'Enter' || e.code === 'Space') go();
     };
-    s.addEventListener('pointerdown', go);
+    // Start on 'click' (not pointerdown): a touch tap's follow-up click must not
+    // land on the freshly shown title's Play button and skip the title screen.
+    s.addEventListener('click', go);
     window.addEventListener('keydown', key);
     this.setScreen(s);
   }
@@ -133,7 +138,8 @@ export class UI {
           ${this.isDesktop ? `<button class="btn" data-a="quit">${icon('door')} Quit</button>` : ''}
         </div>
       </div>
-      <div class="corner">${o.hasProgress ? `<button class="btn small ghost" data-a="reset">${icon('retry')} New game</button>` : ''}</div>`;
+      <div class="corner">${o.hasProgress ? `<button class="btn small ghost" data-a="reset">${icon('retry')} New game</button>` : ''}</div>
+      <div class="app-version">v${__APP_VERSION__}</div>`;
     s.querySelector('[data-a=play]')!.addEventListener('click', o.onPlay);
     s.querySelector('[data-a=settings]')!.addEventListener('click', o.onSettings);
     s.querySelector('[data-a=controls]')!.addEventListener('click', o.onControls);
@@ -147,7 +153,7 @@ export class UI {
 
   showMap(o: { cards: StageCardData[]; current: string; totalStars: number; onPlay: (id: string) => void; onBack: Fn; onSettings: Fn }): void {
     const s = el('div', 'screen map');
-    s.innerHTML = `<div class="map-frame" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(100vw,166.6vh);height:min(100vh,60vw)">${mapArt(o.cards)}</div>
+    s.innerHTML = `<div class="map-frame" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(var(--app-w),calc(var(--app-h) * 1.666));height:min(var(--app-h),calc(var(--app-w) * 0.6))">${mapArt(o.cards)}</div>
       <div class="map-top">
         <button class="icon-btn" data-a="back" aria-label="Back to title">${icon('back')}</button>
         <div class="map-title">${icon('map')} Adventure Map</div>
@@ -283,6 +289,17 @@ export class UI {
   }
 
   onStarShown: ((i: number) => void) | null = null;
+  /** Touch: a blaster slot was tapped. */
+  onSlotTap: ((id: BlasterId) => void) | null = null;
+
+  /** Gentle wobble on a locked slot (no error tone). */
+  nudgeSlot(id: BlasterId): void {
+    const el = this.hudEls['blaster-bar']?.querySelector(`.bslot[data-id="${id}"]`) as HTMLElement | null;
+    if (!el) return;
+    el.classList.remove('nudge');
+    void el.offsetWidth;
+    el.classList.add('nudge');
+  }
 
   showEnding(onDone: Fn): void {
     const s = el('div', 'screen ending');
@@ -390,7 +407,8 @@ export class UI {
       <div class="controls-grid">
         ${row('joystick', 'Left side', 'Drag on the left side to walk (or swim) the way Ace is looking')}
         ${row('drag', 'Right side', 'Drag on the right side to look around')}
-        ${row('bubble', '', 'Hold the bubble button to blow bubbles or launch balls')}
+        ${row('bubble', '', 'Hold the bubble button to blow bubbles - slide your thumb to aim at the same time (push to the edge to keep turning)')}
+        ${row('ball', '1-4', 'Tap a blaster in the bottom bar to pick it')}
         ${row('jumpbtn', 'Jump', 'Jump - underwater it swims up')}
         ${row('updown', 'Down', 'Underwater: swim down')}
         ${row('retry', '', 'Swap blasters')}
@@ -487,6 +505,7 @@ export class UI {
       <div class="panel hint"></div>
       <div class="panel caption"><div class="who"></div><div class="text"></div></div>
       <div class="panel click-to-look">${icon('mouse')} Click to look around with the mouse</div>
+      <div class="panel msg" aria-live="polite"></div>
       <div class="cheers"></div>
       <div class="banners"></div>`;
     this.root.insertBefore(h, this.root.firstChild);
@@ -504,7 +523,17 @@ export class UI {
     };
     obj.addEventListener('touchstart', toggle, { passive: false });
     obj.addEventListener('click', toggle);
-    for (const k of ['helmet', 'crosshair', 'aim-label', 'objectives', 'stars-hud', 'timer', 'blaster-name', 'blaster-bar', 'hint', 'caption', 'click-to-look', 'cheers', 'banners']) {
+    // Touch screens: tap a blaster slot to switch (same as pressing 1-4).
+    const bar = h.querySelector('.blaster-bar') as HTMLElement;
+    bar.addEventListener('touchstart', (e) => {
+      if (!this.touchMode) return;
+      const slot = (e.target as HTMLElement).closest('.bslot') as HTMLElement | null;
+      e.preventDefault();
+      e.stopPropagation();
+      if (slot?.dataset.id) this.onSlotTap?.(slot.dataset.id as BlasterId);
+    }, { passive: false });
+    this.msgBanner = this.msgCaption = this.msgHint = null;
+    for (const k of ['helmet', 'crosshair', 'aim-label', 'objectives', 'stars-hud', 'timer', 'blaster-name', 'blaster-bar', 'hint', 'caption', 'click-to-look', 'cheers', 'banners', 'msg']) {
       this.hudEls[k] = h.querySelector('.' + k) as HTMLElement;
     }
   }
@@ -552,7 +581,7 @@ export class UI {
     const bar = this.hudEls['blaster-bar'];
     if (!bar) return;
     bar.innerHTML = BLASTERS.map(
-      (b) => `<div class="bslot ${unlocked.includes(b.id) ? '' : 'locked'} ${b.id === current ? 'active' : ''}" style="--slot:${b.color}" title="${escapeHtml(b.name)}"><span class="key">${b.slot}</span>${unlocked.includes(b.id) ? icon(b.icon) : icon('lock')}</div>`,
+      (b) => `<div class="bslot ${unlocked.includes(b.id) ? '' : 'locked'} ${b.id === current ? 'active' : ''}" data-id="${b.id}" role="button" aria-label="${escapeHtml(b.name)}${unlocked.includes(b.id) ? '' : ' (not found yet)'}" style="--slot:${b.color}" title="${escapeHtml(b.name)}"><span class="key">${b.slot}</span>${unlocked.includes(b.id) ? icon(b.icon) : icon('lock')}</div>`,
     ).join('');
   }
 
@@ -606,11 +635,51 @@ export class UI {
     window.setTimeout(() => c.remove(), 1150);
   }
 
+  // Touch screens use ONE message slot for banners, captions and hints, shown in
+  // priority order (banner > caption > hint) so they never stack on each other or
+  // cover the middle of a small screen. Desktop keeps the separate placements.
+  private msgBanner: { title: string; sub: string; until: number } | null = null;
+  private msgCaption: { speaker: 'ace' | 'narrator'; text: string; start: number; until: number } | null = null;
+  private msgHint: { html: string; until: number } | null = null;
+  private msgTimer = 0;
+
+  private refreshMsg(): void {
+    const m = this.hudEls.msg;
+    if (!m) return;
+    const now = performance.now();
+    if (this.msgBanner && now >= this.msgBanner.until) this.msgBanner = null;
+    if (this.msgCaption && now >= this.msgCaption.until) this.msgCaption = null;
+    if (this.msgHint && now >= this.msgHint.until) this.msgHint = null;
+    window.clearTimeout(this.msgTimer);
+    let html = '';
+    let kind = '';
+    if (this.msgBanner) {
+      kind = 'banner';
+      html = `<b>${escapeHtml(this.msgBanner.title)}</b>${this.msgBanner.sub ? `<span>${escapeHtml(this.msgBanner.sub)}</span>` : ''}`;
+    } else if (this.msgCaption && now >= this.msgCaption.start) {
+      kind = 'caption';
+      const c = this.msgCaption;
+      html = `<i class="who ${c.speaker}">${c.speaker === 'ace' ? 'A' : icon('voice')}</i><span>${escapeHtml(c.text)}</span>`;
+    } else if (this.msgHint && !(this.msgCaption && now < this.msgCaption.start && !this.msgBanner)) {
+      kind = 'hint';
+      html = `<span>${this.msgHint.html}</span>`;
+    }
+    m.className = `panel msg ${kind ? 'show kind-' + kind : ''}`;
+    if (html) m.innerHTML = html;
+    const capStart = this.msgCaption && this.msgCaption.start > now ? this.msgCaption.start : Infinity;
+    const next = Math.min(this.msgBanner?.until ?? Infinity, this.msgCaption?.until ?? Infinity, this.msgHint?.until ?? Infinity, capStart);
+    if (Number.isFinite(next)) this.msgTimer = window.setTimeout(() => this.refreshMsg(), Math.max(30, next - now + 10));
+  }
+
   banner(title: string, sub = '', seconds = 2.6): void {
+    if (this.touchMode && this.hudEls.msg) {
+      this.msgBanner = { title, sub: touchWording(sub), until: performance.now() + seconds * 1000 };
+      this.refreshMsg();
+      return;
+    }
     const box = this.hudEls.banners;
     if (!box) return;
     box.innerHTML = '';
-    if (this.touchMode) sub = touchWording(sub);
     const b = el('div', 'panel banner', `<h3>${escapeHtml(title)}</h3>${sub ? `<p>${escapeHtml(sub)}</p>` : ''}`);
     box.appendChild(b);
     window.clearTimeout(this.bannerTimer);
@@ -621,6 +690,11 @@ export class UI {
   }
 
   hint(text: string | null, seconds = 0): void {
+    if (this.touchMode && this.hudEls.msg) {
+      this.msgHint = text && this.save.settings.hints ? { html: renderKeys(touchWording(text)), until: seconds > 0 ? performance.now() + seconds * 1000 : Infinity } : null;
+      this.refreshMsg();
+      return;
+    }
     const h = this.hudEls.hint;
     if (!h) return;
     window.clearTimeout(this.hintTimer);
@@ -628,14 +702,23 @@ export class UI {
       h.classList.remove('show');
       return;
     }
-    h.innerHTML = renderKeys(this.touchMode ? touchWording(text) : text);
+    h.innerHTML = renderKeys(text);
     h.classList.add('show');
     if (seconds > 0) this.hintTimer = window.setTimeout(() => h.classList.remove('show'), seconds * 1000);
   }
 
   caption(speaker: 'ace' | 'narrator', text: string, duration: number): void {
+    if (!this.save.settings.subtitles) return;
+    if (this.touchMode && this.hudEls.msg) {
+      // Kids read Ace's lines: a caption that arrives during a banner waits until the banner ends.
+      const now = performance.now();
+      const start = this.msgBanner && this.msgBanner.until > now ? this.msgBanner.until : now;
+      this.msgCaption = { speaker, text, start, until: start + Math.max(1600, duration * 1000 + 500) };
+      this.refreshMsg();
+      return;
+    }
     const c = this.hudEls.caption;
-    if (!c || !this.save.settings.subtitles) return;
+    if (!c) return;
     const who = c.querySelector('.who') as HTMLElement;
     who.className = `who ${speaker}`;
     who.innerHTML = speaker === 'ace' ? 'A' : icon('voice');
@@ -707,7 +790,8 @@ function touchWording(t: string): string {
     .replace(/\[W\] \[A\] \[S\] \[D\] or the arrow keys/g, 'the joystick on the left')
     .replace(/\[W\] swims where you look/g, 'The joystick swims where you look')
     .replace(/([Hh]old) \[Click\]/g, '$1 the bubble button')
-    .replace(/\[Click\]/g, 'Tap the bubble button')
+    .replace(/\[Click\] to blow bubbles/g, 'Hold the bubble button and slide to aim')
+    .replace(/\[Click\]/g, 'Hold the bubble button')
     .replace(/\[Space\]/g, '[Jump]')
     .replace(/\[Shift\]/g, '[Down]')
     .replace(/Press \[2\] \(or \[Q\] \/ \[E\]\)/g, 'Tap the swap button')
@@ -723,7 +807,7 @@ function touchWording(t: string): string {
     .replace(/Move the mouse to look around/g, 'Drag on the right side to look around')
     .replace(/Use W A S D or the arrow keys/g, 'Use the joystick on the left')
     .replace(/Press Space to jump/g, 'Tap Jump to jump')
-    .replace(/Click to blow bubbles/g, 'Tap the bubble button')
+    .replace(/Click to blow bubbles/g, 'Hold the bubble button and slide to aim')
     .replace(/Press 2 for the Boing Ball/g, 'Tap the swap button for the Boing Ball');
 }
 

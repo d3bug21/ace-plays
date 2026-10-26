@@ -48,8 +48,9 @@ blasters: the **Bubble Wand**, **Boing Ball**, **Fizz Fountain** and **Glow Ball
 | Hints on/off | `H` |
 
 **On phones and tablets:** turn your device sideways for the best view. A friendly reminder pops
-up in portrait, and you can tap **Play anyway**. Drag on the left side to walk, drag on the right
-side to look, and use the on-screen buttons to blow bubbles, jump and swap blasters. Tap the goals
+up in portrait, and you can tap **Play anyway**. Drag on the left side to walk and drag on the right
+side to look. Hold the bubble button and slide your thumb to aim while you blow bubbles. Push it
+to the edge to keep turning. Tap 1-4 in the bottom bar (or the swap button) to change blasters. Tap the goals
 card to see all your goals. You can also add Ace Plays! to your home screen: it launches full
 screen like an app, and once loaded it keeps working offline.
 
@@ -94,11 +95,11 @@ Packages are written to `release/`:
 
 | OS | Files |
 | --- | --- |
-| macOS | `AcePlays-1.0.0-mac-arm64.dmg`, `AcePlays-1.0.0-mac-x64.dmg`, `AcePlays-1.0.0-mac-arm64.zip` |
-| Windows | `AcePlays-1.0.0-win-x64.exe` (installer), `AcePlays-1.0.0-win-x64.zip` (portable) |
-| Linux | `AcePlays-1.0.0-linux-x86_64.AppImage`, `AcePlays-1.0.0-linux-x64.tar.gz` |
+| macOS | `AcePlays-1.0.1-mac-arm64.dmg`, `AcePlays-1.0.1-mac-x64.dmg`, `AcePlays-1.0.1-mac-arm64.zip` |
+| Windows | `AcePlays-1.0.1-win-x64.exe` (installer), `AcePlays-1.0.1-win-x64.zip` (portable) |
+| Linux | `AcePlays-1.0.1-linux-x86_64.AppImage`, `AcePlays-1.0.1-linux-x64.tar.gz` |
 
-These are unsigned local builds. On macOS, right-click the app and choose **Open** the first
+`release/SHA256SUMS` lists checksums for every package. These are unsigned local builds. On macOS, right-click the app and choose **Open** the first
 time. On Linux, make the AppImage executable (`chmod +x`) before running it. Building Windows
 and Linux packages on a Mac works without Wine because Windows executable editing is turned off.
 

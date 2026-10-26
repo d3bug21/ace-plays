@@ -19,7 +19,7 @@ import { BlasterRig, BLASTERS, blasterDef } from '../gameplay/Blasters';
 import { UI, type StageCardData } from '../ui/UI';
 import { MenuScene } from '../ui/MenuScene';
 import { TouchControls } from '../ui/Touch';
-import { RotatePrompt, showInAppTip } from '../ui/RotatePrompt';
+import { RotatePrompt, showInAppTip, showHomeScreenTip } from '../ui/RotatePrompt';
 import { detectDevice, type DeviceInfo } from './Device';
 import { STAGES, stageIndex } from '../stages';
 import type { Stage, StageContext, PooledLight } from '../stages/types';
@@ -199,6 +199,15 @@ export class Game {
       this.touch = new TouchControls(uiRoot, this.input);
       this.ui.touchMode = true;
       document.body.classList.add('touch');
+      this.ui.onSlotTap = (id) => {
+        if (this.state !== 'playing') return;
+        if (this.save.hasBlaster(id)) this.rig.select(id);
+        else {
+          this.ui.nudgeSlot(id);
+          this.ui.flashBlasterName('Keep exploring to find this one!');
+          this.audio.sfx('sfx_ui_hover', { volume: 0.8 });
+        }
+      };
       this.touch.onPause = () => this.pause();
       this.touch.onBlasterCycle = () => {
         const owned = BLASTERS.filter((b) => this.save.hasBlaster(b.id));
@@ -220,7 +229,11 @@ export class Game {
       };
     }
     window.addEventListener('touchstart', setupTouch, { once: true, passive: true });
-    window.addEventListener('resize', () => this.resize());
+    window.addEventListener('resize', this.queueResize);
+    window.addEventListener('orientationchange', this.queueResize);
+    document.addEventListener('fullscreenchange', this.queueResize);
+    window.visualViewport?.addEventListener('resize', this.queueResize);
+    window.visualViewport?.addEventListener('scroll', this.queueResize);
     this.resize();
     this.applySettings();
     requestAnimationFrame((t) => this.frame(t));
@@ -276,13 +289,45 @@ export class Game {
     if (!s.hints) this.ui.hint(null);
   }
 
+  private resizeQueued = false;
+
+  /** Coalesce many viewport events into one resize per frame. */
+  private queueResize = (): void => {
+    if (this.resizeQueued) return;
+    this.resizeQueued = true;
+    requestAnimationFrame(() => {
+      this.resizeQueued = false;
+      this.resize();
+    });
+  };
+
+  /**
+   * Size everything from the *visual* viewport, so mobile browser toolbars
+   * (URL bar, bottom bar) never push the HUD or touch buttons off-screen.
+   */
   private resize(): void {
-    const w = window.innerWidth;
-    const h = window.innerHeight;
+    const vv = window.visualViewport;
+    const w = Math.max(1, Math.round(vv?.width ?? window.innerWidth));
+    const h = Math.max(1, Math.round(vv?.height ?? window.innerHeight));
+    const root = document.documentElement.style;
+    root.setProperty('--app-w', `${w}px`);
+    root.setProperty('--app-h', `${h}px`);
+    // Layout classes from the *visible* size (media queries only see the layout viewport).
+    const b = document.body.classList;
+    const landscape = w > h;
+    b.toggle('landscape', landscape);
+    b.toggle('portrait', !landscape);
+    b.toggle('vh-short', landscape ? h <= 520 : h <= 700);
+    b.toggle('vh-tiny', landscape ? h < 310 : h < 560);
+    const app = this.canvas.parentElement;
+    if (app) {
+      app.style.left = `${Math.round(vv?.offsetLeft ?? 0)}px`;
+      app.style.top = `${Math.round(vv?.offsetTop ?? 0)}px`;
+    }
     this.renderer.setSize(w, h, false);
     this.composer.setSize(w, h);
     this.bloom.resolution.set(w / 2, h / 2);
-    this.camera.aspect = w / Math.max(1, h);
+    this.camera.aspect = w / h;
     this.camera.updateProjectionMatrix();
     this.menu.resize(w, h);
     this.fx.setViewport(h * this.renderer.getPixelRatio(), this.camera.fov);
@@ -326,6 +371,7 @@ export class Game {
     if (!this.inAppTipShown) {
       this.inAppTipShown = true;
       showInAppTip(this.uiRoot, this.device);
+      showHomeScreenTip(this.uiRoot, this.device);
     }
     this.menu.setView('title');
     this.audio.playMusic('mus_title');
@@ -346,6 +392,14 @@ export class Game {
         this.showTitle();
       },
     });
+    // Portrait: a browser tip sits in the title's button column (above Play) so it can
+    // never cover the logo, Ace or the buttons. Landscape keeps the small corner card.
+    const tip = this.uiRoot.querySelector('.inapp-tip');
+    const col = this.uiRoot.querySelector('.title .title-buttons');
+    if (tip && col && document.body.classList.contains('portrait')) {
+      tip.classList.add('in-flow');
+      col.prepend(tip);
+    }
   }
 
   private stageCards(): StageCardData[] {
@@ -381,6 +435,8 @@ export class Game {
   enterStage(id: string): void {
     const entry = STAGES.find((s) => s.id === id);
     if (!entry) return;
+    // Tips never block play.
+    this.uiRoot.querySelectorAll('.inapp-tip').forEach((t) => t.remove());
     this.input.gameActive = false;
     void this.ui.wipe(() => {
       this.state = 'intro';
@@ -789,6 +845,8 @@ export class Game {
     const input = this.input;
     const s = this.save.settings;
 
+    // Fire-stick edge-turn adds look before the look step consumes it.
+    this.touch?.update(dt);
     // Look (or a short cinematic glance).
     if (this.focus) {
       this.focus.t -= dt;

@@ -83,7 +83,7 @@ export function showInAppTip(parent: HTMLElement, device: DeviceInfo): void {
   const where = device.ios ? 'Safari' : 'Chrome';
   const name = device.inAppName && device.inAppName !== 'an app' ? device.inAppName : 'this app';
   const tip = document.createElement('div');
-  tip.className = 'inapp-tip panel';
+  tip.className = 'inapp-tip corner-tip panel';
   tip.setAttribute('role', 'note');
   tip.innerHTML = `${icon('sparkle')}<span>Playing inside ${escapeHtml(name)}? For the best sound and full screen, open Ace Plays! in ${where}${device.ios ? ' (tap ••• then "Open in Safari")' : ' (tap ⋮ then "Open in Chrome")'}.</span><button class="icon-btn" aria-label="Close tip">${icon('close')}</button>`;
   parent.appendChild(tip);
@@ -118,4 +118,24 @@ function rotateArt(): string {
       </g></g>
     </g></g>
   </svg>`;
+}
+
+/** iOS browsers (not home-screen mode): one-time tip that Add to Home Screen gives full-screen play. */
+export function showHomeScreenTip(parent: HTMLElement, device: DeviceInfo): void {
+  if (!device.ios || device.inApp || device.desktopApp) return;
+  const standalone = (navigator as unknown as { standalone?: boolean }).standalone === true || !!window.matchMedia?.('(display-mode: standalone)').matches || !!window.matchMedia?.('(display-mode: fullscreen)').matches;
+  if (standalone) return;
+  try {
+    if (localStorage.getItem('acePlays.homeTip') === '1') return;
+    localStorage.setItem('acePlays.homeTip', '1');
+  } catch {
+    return;
+  }
+  const tip = document.createElement('div');
+  tip.className = 'inapp-tip corner-tip panel';
+  tip.setAttribute('role', 'note');
+  tip.innerHTML = `${icon('sparkle')}<span>Psst! Tap Share, then "Add to Home Screen" to play Ace Plays! full screen, just like an app. Sweet as!</span><button class="icon-btn" aria-label="Close tip">${icon('close')}</button>`;
+  parent.appendChild(tip);
+  tip.querySelector('button')!.addEventListener('click', () => tip.remove());
+  window.setTimeout(() => tip.remove(), 14000);
 }

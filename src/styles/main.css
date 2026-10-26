@@ -37,7 +37,11 @@ html, body {
   -webkit-user-select: none;
 }
 
-#app { position: fixed; inset: 0; }
+/* Sized from window.visualViewport by Game.resize (--app-w/--app-h), so mobile browser
+   toolbars never push the HUD off-screen. dvh/vh are fallbacks before JS runs. */
+:root { --app-w: 100vw; --app-h: 100vh; }
+@supports (height: 100dvh) { :root { --app-h: 100dvh; } }
+#app { position: fixed; left: 0; top: 0; width: var(--app-w); height: var(--app-h); overflow: hidden; touch-action: none; }
 #game-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; outline: none; }
 #ui { position: absolute; inset: 0; pointer-events: none; }
 #ui > * { pointer-events: auto; }
@@ -281,7 +285,7 @@ button { font-family: inherit; }
 
 /* ------------------------------------------------------------ modal menus */
 .modal-bg { position: absolute; inset: 0; background: rgba(28, 40, 46, 0.45); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 20px; }
-.modal { width: min(560px, 100%); max-height: calc(100vh - 40px); overflow: auto; padding: 26px 28px 24px; display: flex; flex-direction: column; gap: 14px; animation: modalIn 0.3s cubic-bezier(0.2, 1.3, 0.4, 1) both; }
+.modal { width: min(560px, 100%); max-height: calc(var(--app-h) - 40px); overflow: auto; padding: 26px 28px 24px; display: flex; flex-direction: column; gap: 14px; animation: modalIn 0.3s cubic-bezier(0.2, 1.3, 0.4, 1) both; }
 @keyframes modalIn { from { opacity: 0; transform: translateY(16px) scale(0.97); } to { opacity: 1; transform: none; } }
 .modal h2 { margin: 0 0 4px; font-size: 2rem; display: flex; align-items: center; gap: 12px; }
 .modal h2 svg { width: 34px; height: 34px; color: var(--teal); }
@@ -347,7 +351,7 @@ input[type='range']:focus-visible { outline: 3px solid var(--butter); outline-of
 
 /* ------------------------------------------------------------ narrow / short screens */
 @media (max-width: 760px) {
-  .objectives { width: calc(100vw - 120px); padding: 10px 12px; }
+  .objectives { width: calc(var(--app-w) - 120px); padding: 10px 12px; }
   .obj { font-size: 0.95rem; }
   .obj.main { font-size: 1.02rem; }
   .bslot { width: 52px; height: 52px; }
@@ -428,13 +432,13 @@ input[type='range']:focus-visible { outline: 3px solid var(--butter); outline-of
   body.touch .tbtn.down { right: 112px; bottom: 172px; width: 54px; height: 54px; }
   body.touch .tbtn.swap { right: 30px; bottom: 200px; width: 50px; height: 50px; }
   body.touch .tbtn.tpause { right: 18px; top: 84px; margin-right: 0; width: 44px; height: 44px; }
-  body.touch .objectives { width: calc(100vw - 150px); }
-  body.touch .banner { top: 30%; width: calc(100vw - 24px); }
+  body.touch .objectives { width: calc(var(--app-w) - 150px); }
+  body.touch .banner { top: 30%; width: calc(var(--app-w) - 24px); }
   body.touch .timer { top: 140px; }
 }
 
 /* ------------------------------------------------------------ rotate prompt (phones/tablets only) */
-.rotate-prompt { position: fixed; inset: 0; z-index: 80; display: none; align-items: center; justify-content: center; padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left)); background: radial-gradient(120% 90% at 50% 35%, #6fa8a3 0%, #2f625d 100%); pointer-events: auto; }
+.rotate-prompt { position: absolute; inset: 0; z-index: 80; display: none; align-items: center; justify-content: center; padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left)); background: radial-gradient(120% 90% at 50% 35%, #6fa8a3 0%, #2f625d 100%); pointer-events: auto; }
 .rotate-prompt.show { display: flex; animation: rpIn 0.35s ease both; }
 @keyframes rpIn { from { opacity: 0; } to { opacity: 1; } }
 .rp-card { width: min(380px, 100%); text-align: center; color: var(--cream); display: flex; flex-direction: column; align-items: center; gap: 12px; }
@@ -452,14 +456,14 @@ input[type='range']:focus-visible { outline: 3px solid var(--butter); outline-of
 @keyframes rpArrow { 0%, 15% { opacity: 0.2; } 30%, 60% { opacity: 1; } 85%, 100% { opacity: 0.2; } }
 .rotate-prompt .btn { margin-top: 4px; }
 
-.inapp-tip { position: absolute; left: 50%; top: max(12px, env(safe-area-inset-top)); transform: translateX(-50%); width: min(520px, calc(100vw - 24px)); display: flex; align-items: center; gap: 10px; padding: 10px 10px 10px 14px; font-size: 0.95rem; line-height: 1.35; z-index: 40; }
+.inapp-tip { position: absolute; left: 50%; top: max(12px, env(safe-area-inset-top)); transform: translateX(-50%); width: min(520px, calc(var(--app-w) - 24px)); display: flex; align-items: center; gap: 10px; padding: 10px 10px 10px 14px; font-size: 0.95rem; line-height: 1.35; z-index: 40; }
 .inapp-tip svg { width: 22px; height: 22px; flex: none; color: var(--teal); }
 .inapp-tip .icon-btn { width: 36px; height: 36px; flex: none; box-shadow: none; background: var(--cream-2); }
 .inapp-tip .icon-btn svg { width: 18px; height: 18px; color: var(--ink); }
 
 /* ------------------------------------------------------------ compact objectives on touch screens */
 .obj-toggle { display: none; }
-body.touch #ui .hud .objectives { pointer-events: auto; z-index: 6; cursor: pointer; top: max(10px, env(safe-area-inset-top)); left: max(10px, env(safe-area-inset-left)); width: auto; max-width: min(340px, calc(100vw - 190px)); padding: 7px 12px; gap: 4px; }
+body.touch #ui .hud .objectives { pointer-events: auto; z-index: 6; cursor: pointer; top: max(10px, env(safe-area-inset-top)); left: max(10px, env(safe-area-inset-left)); width: auto; max-width: min(340px, calc(var(--app-w) - 190px)); padding: 7px 12px; gap: 4px; }
 body.touch .objectives .obj-stage, body.touch .objectives .obj-sep, body.touch .objectives .obj:not(.main) { display: none; }
 body.touch .objectives.expanded .obj-stage, body.touch .objectives.expanded .obj-sep { display: flex; }
 body.touch .objectives.expanded .obj-sep { display: block; }
@@ -477,3 +481,163 @@ body.touch .blaster-bar { bottom: max(8px, env(safe-area-inset-bottom)); }
 body.touch .tbtn.fire, body.touch .tbtn.jump, body.touch .tbtn.down, body.touch .tbtn.swap { margin-right: env(safe-area-inset-right); margin-bottom: env(safe-area-inset-bottom); }
 body.touch .tbtn.tpause { top: max(64px, calc(env(safe-area-inset-top) + 56px)); right: max(16px, env(safe-area-inset-right)); margin-right: 0; width: 44px; height: 44px; }
 body.touch .touch-zone.left { left: env(safe-area-inset-left); }
+
+
+/* ------------------------------------------------------------ v1.0.1: fire-stick + tappable slots */
+.fs-ring { position: absolute; width: 156px; height: 156px; margin: -78px 0 0 -78px; border-radius: 50%; border: 2.5px dashed rgba(251, 246, 236, 0.75); background: rgba(251, 246, 236, 0.12); display: none; pointer-events: none; transition: border-color 0.15s, background 0.15s; }
+.fs-ring.show { display: block; }
+.fs-ring.edge { border-color: var(--butter); border-style: solid; background: rgba(240, 203, 108, 0.16); }
+.tbtn.fire { transition: transform 0.06s linear; z-index: 2; }
+/* Slots sit above the touch zones and are tappable on touch screens only. */
+body.touch #ui .hud .blaster-bar { pointer-events: auto; z-index: 6; }
+body.touch #ui .hud .blaster-bar .bslot { pointer-events: auto; min-width: 44px; min-height: 44px; cursor: pointer; }
+body.touch .bslot.nudge { animation: slotNudge 0.45s ease; }
+@keyframes slotNudge { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px); } 50% { transform: translateX(4px); } 75% { transform: translateX(-2px); } }
+.app-version { position: absolute; left: max(14px, env(safe-area-inset-left)); bottom: max(12px, env(safe-area-inset-bottom)); font-size: 0.78rem; color: rgba(44, 59, 67, 0.55); font-weight: 500; letter-spacing: 0.04em; pointer-events: none; }
+
+/* Short landscape (phone sideways, especially with a browser toolbar showing):
+   pause moves beside the stars and swap sits right above the fire-stick, so the
+   right-hand column never stacks taller than the screen. */
+@media (max-height: 520px) and (orientation: landscape) {
+  body.touch .tbtn.tpause { top: max(10px, env(safe-area-inset-top)); right: max(124px, calc(env(safe-area-inset-right) + 114px)); width: 40px; height: 40px; }
+  body.touch .tbtn.swap { right: 34px; bottom: 156px; width: 46px; height: 46px; }
+}
+@media (max-height: 300px) and (orientation: landscape) {
+  body.touch .tbtn.fire { bottom: 58px; width: 70px; height: 70px; }
+  body.touch .tbtn.swap { right: 30px; bottom: 134px; width: 42px; height: 42px; }
+  body.touch .tbtn.jump { bottom: 40px; }
+  body.touch .tbtn.down { bottom: 100px; }
+}
+/* Touch: blaster name flashes near the top so it never collides with hints/captions. */
+body.touch .blaster-name { top: max(56px, calc(env(safe-area-inset-top) + 50px)); bottom: auto; }
+/* Short landscape: compact stage card on the map so the islands stay visible. */
+@media (max-height: 520px) {
+  .stage-card { width: min(330px, 44vw); padding: 12px 16px 12px; gap: 6px; right: 12px; bottom: 12px; }
+  .stage-card h2 { font-size: 1.3rem; }
+  .stage-card h2 svg { width: 24px; height: 24px; }
+  .stage-card p { font-size: 0.88rem; }
+  .stage-card li { font-size: 0.85rem; gap: 6px; }
+  .stage-card li svg { width: 16px; height: 16px; }
+  .stage-card .btn { font-size: 1rem; min-height: 40px; padding: 0.45em 1.1em; }
+  .map .map-top { top: 8px; }
+  .map .map-title { font-size: 1.2rem; padding: 6px 14px; }
+  .map-node .disc { width: 56px; height: 56px; border-width: 4px; }
+  .map-node .label { font-size: 0.8rem; }
+}
+/* Short landscape title: smaller buttons, "New game" moves to the top corner. */
+@media (max-height: 520px) {
+  .title { padding: 2vh 4vw 3vh; }
+  .title-buttons { gap: 8px; }
+  .title .btn.big { font-size: 1.2rem; padding: 0.5em 1.5em; min-height: 44px; }
+  .title .btn { font-size: 1rem; min-height: 44px; padding: 0.5em 1.1em; }
+  .title .corner { top: max(10px, env(safe-area-inset-top)); bottom: auto; right: max(12px, env(safe-area-inset-right)); }
+}
+
+/* =====================================================================
+   v1.0.1 compact touch HUD: one message slot + visible-size layout classes
+   (body.portrait / body.landscape / body.vh-short / body.vh-tiny are set from
+   window.visualViewport by Game.resize, so browser toolbars are accounted for).
+   ===================================================================== */
+.hud .msg { display: none; }
+body.touch .hud .banners, body.touch .hud .hint, body.touch .hud .caption { display: none !important; }
+body.touch .hud .msg { display: none; position: absolute; left: 50%; transform: translateX(-50%); z-index: 3; align-items: center; justify-content: center; gap: 8px; padding: 7px 14px; border-radius: 16px; font-size: 0.95rem; line-height: 1.3; text-align: center; width: max-content; max-width: calc(var(--app-w) - 24px); box-sizing: border-box; }
+body.touch .hud .msg.show { display: flex; animation: msgIn 0.25s ease both; }
+@keyframes msgIn { from { opacity: 0; transform: translateX(-50%) translateY(4px); } to { opacity: 1; transform: translateX(-50%); } }
+body.touch .hud .msg span { display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+body.touch .hud .msg.kind-banner { flex-direction: column; gap: 1px; padding: 6px 16px; }
+body.touch .hud .msg.kind-banner b { font-size: 1.05rem; line-height: 1.2; }
+body.touch .hud .msg.kind-banner span { font-size: 0.85rem; color: var(--ink-soft); -webkit-line-clamp: 1; line-clamp: 1; }
+body.touch .hud .msg .who { flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-style: normal; font-weight: 700; font-size: 0.8rem; }
+body.touch .hud .msg .who.ace { background: var(--butter); color: var(--ink); }
+body.touch .hud .msg .who.narrator { background: var(--teal); color: #fff; }
+body.touch .hud .msg .who svg { width: 16px; height: 16px; }
+body.touch .hud .msg .kbd { font-size: 0.82em; }
+/* Portrait: just under the top HUD row (centre and thumbs stay clear). */
+body.touch.portrait .hud .msg { top: calc(max(10px, env(safe-area-inset-top)) + 96px); }
+body.touch.portrait .tbtn.tpause { top: max(10px, env(safe-area-inset-top)); right: max(120px, calc(env(safe-area-inset-right) + 110px)); width: 44px; height: 44px; margin-right: 0; }
+body.touch.portrait .objectives { max-width: min(340px, calc(var(--app-w) - 190px)); }
+/* Landscape: above the blaster bar, between the side controls. */
+body.touch.landscape .hud .msg { bottom: calc(max(8px, env(safe-area-inset-bottom)) + 66px); max-width: max(220px, calc(var(--app-w) - 390px)); }
+body.touch.landscape .tbtn.tpause { top: max(10px, env(safe-area-inset-top)); right: max(124px, calc(env(safe-area-inset-right) + 114px)); width: 40px; height: 40px; margin-right: 0; }
+body.touch.landscape .objectives { max-width: min(340px, calc(var(--app-w) - 420px)); }
+/* Challenge timer: small pill under the goals card. */
+body.touch .timer { top: calc(max(10px, env(safe-area-inset-top)) + 46px); left: max(10px, env(safe-area-inset-left)); transform: none; font-size: 1rem; padding: 5px 12px; gap: 6px; }
+body.touch .timer svg { width: 20px; height: 20px; }
+body.touch .timer .lbl { font-size: 0.8rem; max-width: 9em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* Swap button: clearer icon + label. */
+.tbtn.swap span { font-size: 0.62rem; bottom: 4px; }
+.tbtn.swap svg { width: 44%; height: 44%; margin-top: -6px; }
+/* Short landscape (visible height <= 520). */
+body.touch.landscape.vh-short .blaster-bar { bottom: max(8px, env(safe-area-inset-bottom)); padding: 6px 8px; gap: 6px; border-radius: 18px; }
+body.touch.landscape.vh-short .bslot { width: 44px; height: 44px; border-radius: 12px; }
+body.touch.landscape.vh-short .bslot svg { width: 24px; height: 24px; }
+body.touch.landscape.vh-short .tbtn.fire { right: 18px; bottom: 70px; width: 78px; height: 78px; }
+body.touch.landscape.vh-short .tbtn.jump { right: 106px; bottom: 50px; width: 56px; height: 56px; }
+body.touch.landscape.vh-short .tbtn.down { right: 106px; bottom: 114px; width: 50px; height: 50px; }
+body.touch.landscape.vh-short .tbtn.swap { right: 34px; bottom: 158px; width: 46px; height: 46px; }
+body.touch.landscape.vh-short .objectives .obj.main { font-size: 0.9rem; }
+body.touch.landscape.vh-short .stars-hud svg { width: 20px; height: 20px; }
+body.touch.landscape.vh-short .crosshair { width: 28px; height: 28px; }
+/* Tiny landscape (visible height < 310, e.g. phone sideways with a toolbar). */
+body.touch.landscape.vh-tiny .tbtn.fire { bottom: 58px; width: 68px; height: 68px; }
+body.touch.landscape.vh-tiny .tbtn.jump { bottom: 40px; width: 52px; height: 52px; right: 98px; }
+body.touch.landscape.vh-tiny .tbtn.down { bottom: 98px; right: 98px; width: 46px; height: 46px; }
+body.touch.landscape.vh-tiny .tbtn.swap { right: 30px; bottom: 132px; width: 42px; height: 42px; }
+body.touch.landscape.vh-tiny .blaster-bar { bottom: 4px; padding: 4px 6px; gap: 4px; }
+body.touch.landscape.vh-tiny .hud .msg { bottom: 58px; font-size: 0.76rem; padding: 4px 10px; }
+body.touch.landscape.vh-tiny .hud .msg span { -webkit-line-clamp: 2; line-clamp: 2; }
+body.touch.landscape.vh-tiny .hud .msg.kind-banner b { font-size: 0.9rem; }
+body.touch.landscape.vh-tiny .stars-hud { padding: 4px 8px; }
+
+/* =====================================================================
+   Menus always fit the visible viewport; primary buttons stay visible.
+   ===================================================================== */
+.screen { max-height: var(--app-h); }
+.intro { overflow-y: auto; justify-content: flex-start; }
+.intro > :first-child { margin-top: auto; }
+.intro > :last-child { margin-bottom: auto; }
+.intro h1 { font-size: clamp(1.9rem, calc(var(--app-h) * 0.13), 6rem); }
+.intro .go { position: sticky; bottom: 6px; margin-top: clamp(6px, calc(var(--app-h) * 0.03), 18px); }
+.intro { gap: clamp(6px, calc(var(--app-h) * 0.025), 18px); }
+.intro p { font-size: clamp(0.92rem, calc(var(--app-h) * 0.035), 1.5rem); }
+.intro .goal { padding: clamp(4px, calc(var(--app-h) * 0.012), 8px) 14px; font-size: clamp(0.85rem, calc(var(--app-h) * 0.03), 1.05rem); }
+.intro .btn.big { font-size: clamp(1.1rem, calc(var(--app-h) * 0.045), 1.5rem); padding: 0.55em 1.7em; }
+.logo { font-size: clamp(2.4rem, min(11vw, calc(var(--app-h) * 0.16)), 8.5rem); }
+.title { padding: clamp(8px, calc(var(--app-h) * 0.05), 6vh) 4vw clamp(10px, calc(var(--app-h) * 0.06), 7vh); }
+.title .btn.big { font-size: clamp(1.15rem, calc(var(--app-h) * 0.045), 1.5rem); }
+.boot .logo-small { font-size: clamp(2rem, min(6vw, calc(var(--app-h) * 0.12)), 4.5rem); }
+.modal { max-height: calc(var(--app-h) - 24px); }
+.modal-bg { padding: 12px; }
+.modal > .row:last-child { position: sticky; bottom: -24px; margin: 0 -28px -24px; padding: 10px 28px 14px; background: linear-gradient(to bottom, rgba(251, 246, 236, 0), var(--cream) 30%); }
+.results .res-panel { max-height: calc(var(--app-h) - 24px); overflow-y: auto; }
+.results .res-actions { position: sticky; bottom: -26px; margin: 0 -28px -26px; padding: 10px 28px 14px; background: linear-gradient(to bottom, rgba(251, 246, 236, 0), var(--cream) 30%); }
+.stage-card { max-height: calc(var(--app-h) - 76px); overflow-y: auto; }
+.stage-card .card-actions { position: sticky; bottom: -20px; margin: 0 -24px -20px; padding: 8px 24px 12px; background: linear-gradient(to bottom, rgba(251, 246, 236, 0), var(--cream) 30%); }
+.rp-card { max-height: calc(var(--app-h) - 40px); overflow-y: auto; }
+body.vh-short .results { padding: 10px; }
+body.vh-short .results .res-panel { padding: 14px 18px; gap: 8px; }
+body.vh-short .results h2 { font-size: 1.6rem; }
+body.vh-short .res-stars svg { width: 44px; height: 44px; }
+body.vh-short .res-stars .rs { font-size: 0.78rem; }
+body.vh-short .res-reward { padding: 8px 12px; }
+body.vh-short .res-reward svg { width: 34px; height: 34px; }
+body.vh-short .modal { padding: 16px 20px 14px; gap: 8px; }
+body.vh-short .modal > .row:last-child { margin: 0 -20px -14px; padding: 8px 20px 10px; bottom: -14px; }
+body.vh-short .modal h2 { font-size: 1.5rem; }
+body.vh-short .modal .stack { gap: 8px; }
+body.vh-short .modal .stack .btn { min-height: 42px; padding-top: 0.45em; padding-bottom: 0.45em; font-size: 1rem; }
+body.vh-short .setting { padding: 6px 0; }
+/* Compact goals card stays one line (ellipsis); tap it to read everything. */
+body.touch .objectives:not(.expanded) .obj.main > span:not(.count) { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+body.touch .objectives:not(.expanded) .obj.main { flex-wrap: nowrap; }
+/* Tiny landscape: banners show their title only. */
+body.touch.landscape.vh-tiny .hud .msg.kind-banner span { display: none; }
+/* Stacking: HUD (incl. tappable slots, z 6) < full screens < modals < tips < wipe < rotate prompt. */
+#ui > .screen { z-index: 20; }
+#ui > .modal-bg { z-index: 30; }
+/* Browser tips (in-app / Add to Home Screen): a small corner card that never covers
+   the logo, Ace or the title buttons. */
+.inapp-tip.corner-tip { left: max(12px, env(safe-area-inset-left)); right: auto; top: auto; bottom: calc(max(12px, env(safe-area-inset-bottom)) + 24px); transform: none; width: min(300px, calc(var(--app-w) * 0.28)); font-size: 0.8rem; line-height: 1.3; padding: 8px 6px 8px 10px; gap: 8px; align-items: flex-start; }
+.inapp-tip.corner-tip svg { width: 18px; height: 18px; margin-top: 2px; }
+.inapp-tip.corner-tip .icon-btn { width: 30px; height: 30px; }
+#ui .inapp-tip.corner-tip.in-flow { position: static; transform: none; width: min(340px, calc(var(--app-w) - 24px)); margin-bottom: 4px; }

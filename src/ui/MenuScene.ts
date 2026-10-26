@@ -156,7 +156,7 @@ export class MenuScene {
       const a = Math.sin(t * 0.08) * 0.12;
       const ox = narrow ? 0 : -1.7;
       this.camera.position.set(ox + Math.sin(a) * 7.2, 2.1, Math.cos(a) * 7.2);
-      this.camera.lookAt(ox, narrow ? 1.2 : 1.6, 0);
+      this.camera.lookAt(ox, narrow ? 0.85 : 1.6, 0);
       this.ace.root.rotation.y = Math.sin(t * 0.3) * 0.12 - 0.25;
     } else {
       // Results: Ace on the left third, panel on the right.
