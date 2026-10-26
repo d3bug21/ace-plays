@@ -4,7 +4,9 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "ace-plays",
   "compatibility_date": "2026-10-26",
-  "assets": {
-    "directory": "./dist"
-  }
+  // Custom domain on the Tamariki Games site; Cloudflare creates DNS and the certificate on deploy.
+  "routes": [{ "pattern": "ace-plays.tamarikigames.com", "custom_domain": true }],
+  // Keep ace-plays.ace-plays.workers.dev working so earlier players keep their saved progress there.
+  "workers_dev": true,
+  "assets": { "directory": "./dist" }
 }

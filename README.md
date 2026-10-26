@@ -5,7 +5,9 @@ boy explorer with a backpack full of playful blasters that blow wobbly bubbles a
 bouncy balls. Nobody ever gets hurt. Bubbled critters float away in a happy bubble, booped
 sharks do a barrel roll, and targets pop into soft sparkles.
 
-### ▶ [Play in your browser](https://ace-plays.ace-plays.workers.dev)
+### ▶ [Play in your browser](https://ace-plays.tamarikigames.com)
+
+Part of [Tamariki Games](https://tamarikigames.com/games/ace-plays/).
 
 Works on computers, tablets and phones (turn your phone sideways for the best view). Prefer a desktop app? Grab one from the [latest release](https://github.com/d3bug21/ace-plays/releases/latest).
 
