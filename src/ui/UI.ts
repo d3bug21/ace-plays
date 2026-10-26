@@ -151,47 +151,69 @@ export class UI {
     window.setTimeout(() => (s.querySelector('[data-a=play]') as HTMLElement | null)?.focus(), 400);
   }
 
+  private mapRelayout: (() => void) | null = null;
+
+  /** Re-fit layout-sensitive screens after a viewport change. */
+  relayout(): void {
+    this.mapRelayout?.();
+  }
+
   showMap(o: { cards: StageCardData[]; current: string; totalStars: number; onPlay: (id: string) => void; onBack: Fn; onSettings: Fn }): void {
     const s = el('div', 'screen map');
-    s.innerHTML = `<div class="map-frame" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(var(--app-w),calc(var(--app-h) * 1.666));height:min(var(--app-h),calc(var(--app-w) * 0.6))">${mapArt(o.cards)}</div>
+    s.innerHTML = `<div class="map-frame">${mapArt(o.cards)}</div>
       <div class="map-top">
         <button class="icon-btn" data-a="back" aria-label="Back to title">${icon('back')}</button>
-        <div class="map-title">${icon('map')} Adventure Map</div>
-        <div style="display:flex;gap:10px;align-items:center">
+        <div class="map-title">${icon('map')} <span class="mt-long">Adventure Map</span><span class="mt-short">Map</span></div>
+        <div class="map-top-right">
           <div class="star-total" title="Stars collected">${icon('star')} <span>${o.totalStars} / ${o.cards.length * 3}</span></div>
           <button class="icon-btn" data-a="settings" aria-label="Settings">${icon('gear')}</button>
         </div>
       </div>`;
     const frame = s.querySelector('.map-frame') as HTMLElement;
+    const header = s.querySelector('.map-top') as HTMLElement;
     const card = el('div', 'panel stage-card');
     s.appendChild(card);
     const nodes: HTMLElement[] = [];
+    let selIndex = 0;
     const select = (c: StageCardData, focusPlay = false) => {
+      selIndex = o.cards.indexOf(c);
       nodes.forEach((n) => n.classList.toggle('sel', n.dataset.id === c.info.id));
       card.style.setProperty('--card-accent', c.info.accent);
       const goals = c.objectives.filter((x) => x.kind === 'main');
       const tre = c.objectives.find((x) => x.kind === 'treasure');
       const ch = c.objectives.find((x) => x.kind === 'challenge');
-      const li = (got: boolean, ic: string, text: string) => `<li class="${got ? 'got' : ''}">${got ? icon('star') : icon('starEmpty')}<span>${icon(ic).replace('<svg', '<svg style="width:20px;height:20px;vertical-align:-4px;margin-right:6px;color:' + c.info.accent + '"')}${escapeHtml(text)}</span></li>`;
+      const li = (got: boolean, ic: string, text: string) => `<li class="${got ? 'got' : ''}" title="${escapeHtml(text)}" aria-label="${escapeHtml(text)}${got ? ' (star earned)' : ''}">${got ? icon('star') : icon('starEmpty')}<span>${icon(ic).replace('<svg', '<svg class="li-ic" style="color:' + c.info.accent + '"')}${escapeHtml(text)}</span></li>`;
       card.innerHTML = `
-        <h2>${icon(c.info.icon)} ${escapeHtml(c.info.name)}</h2>
-        <p>${escapeHtml(c.info.tagline)}</p>
-        <ul>
-          ${li(c.stars[0], goals[goals.length - 1]?.icon ?? 'flag', 'Finish the adventure')}
-          ${tre ? li(c.stars[1], tre.icon, tre.label) : ''}
-          ${ch ? li(c.stars[2], ch.icon, ch.label + (c.bestTime ? ` (best ${c.bestTime.toFixed(1)}s)` : '')) : ''}
-        </ul>
-        ${c.unlocked ? '' : `<div class="lock-note">${icon('lock')} <span>Finish ${escapeHtml(c.lockedBy ?? 'the last world')} to open this world!</span></div>`}
-        <div class="card-actions"><button class="btn primary" data-a="go" ${c.unlocked ? '' : 'disabled'}>${icon('play')} ${c.stars[0] ? 'Play again' : "Let's go!"}</button></div>`;
+        <div class="card-head">
+          <button class="icon-btn card-nav" data-a="prev" aria-label="Previous world">${icon('back')}</button>
+          <h2>${icon(c.info.icon)} <span>${escapeHtml(c.info.name)}</span></h2>
+          <button class="icon-btn card-nav next" data-a="next" aria-label="Next world">${icon('back')}</button>
+        </div>
+        <div class="card-body">
+          ${c.unlocked ? '' : `<div class="lock-note">${icon('lock')} <span>Finish ${escapeHtml(c.lockedBy ?? 'the last world')} to open this world!</span></div>`}
+          <p class="tagline">${escapeHtml(c.info.tagline)}</p>
+          <ul>
+            ${li(c.stars[0], goals[goals.length - 1]?.icon ?? 'flag', 'Finish the adventure')}
+            ${tre ? li(c.stars[1], tre.icon, tre.label) : ''}
+            ${ch ? li(c.stars[2], ch.icon, ch.label + (c.bestTime ? ` (best ${c.bestTime.toFixed(1)}s)` : '')) : ''}
+          </ul>
+        </div>
+        <div class="card-actions"><button class="btn primary" data-a="go" ${c.unlocked ? '' : 'disabled'}>${icon(c.unlocked ? 'play' : 'lock')} ${c.unlocked ? (c.stars[0] ? 'Play again' : "Let's go!") : 'Locked'}</button></div>`;
       card.classList.add('show');
       const go = card.querySelector('[data-a=go]') as HTMLButtonElement;
-      go.addEventListener('click', () => o.onPlay(c.info.id));
+      go.addEventListener('click', () => c.unlocked && o.onPlay(c.info.id));
       go.addEventListener('mouseenter', () => this.sounds?.hover());
       go.addEventListener('click', () => this.sounds?.click());
-      if (focusPlay && c.unlocked) go.focus();
-      // Move Ace's token.
+      const step = (d: number) => {
+        this.sounds?.click();
+        select(o.cards[(selIndex + d + o.cards.length) % o.cards.length], false);
+      };
+      card.querySelector('[data-a=prev]')!.addEventListener('click', () => step(-1));
+      card.querySelector('[data-a=next]')!.addEventListener('click', () => step(1));
+      if (focusPlay && c.unlocked) go.focus({ preventScroll: true });
       token.style.left = `${c.info.map.x}%`;
       token.style.top = `${c.info.map.y}%`;
+      layout();
     };
     const token = el('div', 'ace-token', aceTokenSvg());
     for (const c of o.cards) {
@@ -211,9 +233,123 @@ export class UI {
     frame.appendChild(token);
     s.querySelector('[data-a=back]')!.addEventListener('click', o.onBack);
     s.querySelector('[data-a=settings]')!.addEventListener('click', o.onSettings);
+
+    // Fit the map into the space the card and header leave free, so no node,
+    // label or star row is ever covered (any viewport, any selection).
+    const safe = el('div', 'safe-probe');
+    s.appendChild(safe);
+    const layout = () => {
+      const W = s.clientWidth;
+      const H = s.clientHeight;
+      if (!W || !H) return;
+      const cs = getComputedStyle(safe);
+      const sl = parseFloat(cs.paddingLeft) || 0;
+      const sr = parseFloat(cs.paddingRight) || 0;
+      const sb = parseFloat(cs.paddingBottom) || 0;
+      const top = header.offsetTop + header.offsetHeight + 6;
+      const landscape = W > H;
+      let ax: number, ay: number, aw: number, ah: number;
+      if (landscape) {
+        const cw = Math.round(Math.min(360, Math.max(232, W * 0.33)));
+        // Side column: as tall as its content, never taller than the free height.
+        Object.assign(card.style, { left: 'auto', right: `${sr + 10}px`, top: `${top}px`, bottom: 'auto', width: `${cw}px`, maxHeight: `${H - top - sb - 10}px` });
+        card.classList.add('side');
+        ax = sl + 8;
+        ay = top;
+        aw = W - cw - sl - sr - 30;
+        ah = H - top - sb - 8;
+      } else {
+        Object.assign(card.style, { left: `${sl + 10}px`, right: `${sr + 10}px`, top: 'auto', bottom: `${sb + 10}px`, width: 'auto', maxHeight: `${Math.round(H * 0.46)}px` });
+        card.classList.remove('side');
+        ax = sl + 6;
+        ay = top;
+        aw = W - sl - sr - 12;
+        ah = H - top - card.offsetHeight - sb - 18;
+      }
+      // Fit so every node *block* (disc + label + stars, centred on its anchor) lies
+      // inside the free area: the art may extend under the card, nodes never do.
+      const xs = o.cards.map((c) => c.info.map.x / 100);
+      const ys = o.cards.map((c) => c.info.map.y / 100);
+      const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
+      const fit = (bw0: number, bhExtra: number) => {
+        let disc = 64;
+        let fw = 0;
+        for (let k = 0; k < 3; k++) {
+          const bw = Math.max(disc, bw0);
+          const bh = disc + bhExtra;
+          const byW = (aw - bw - 8) / (x1 - x0);
+          const byH = ((ah - bh - 8) / (y1 - y0)) * (5 / 3);
+          fw = Math.max(140, Math.min(byW, byH, 1500));
+          disc = Math.round(Math.max(44, Math.min(88, fw * 0.085)));
+        }
+        // Would any two node blocks overlap at this size?
+        const bw = Math.max(disc, bw0) + 4;
+        const bh = disc + bhExtra + 4;
+        let crowded = false;
+        for (let i = 0; i < xs.length; i++)
+          for (let j = i + 1; j < xs.length; j++)
+            if (Math.abs(xs[i] - xs[j]) * fw < bw && Math.abs(ys[i] - ys[j]) * fw * 0.6 < bh) crowded = true;
+        return { disc, fw, crowded };
+      };
+      const apply = (ff: { disc: number; fw: number }, mode: 'full' | 'names' | 'discs') => {
+        frame.classList.toggle('compact-nodes', mode === 'discs');
+        frame.classList.toggle('names-only', mode === 'names');
+        frame.style.setProperty('--disc', `${ff.disc}px`);
+        frame.style.width = `${ff.fw}px`;
+        frame.style.height = `${ff.fw * 0.6}px`;
+        frame.style.left = `${ax + aw / 2 - ((x0 + x1) / 2) * ff.fw}px`;
+        frame.style.top = `${ay + ah / 2 - ((y0 + y1) / 2) * ff.fw * 0.6}px`;
+      };
+      const touching = () => {
+        const boxes = nodes.map((n) => n.getBoundingClientRect());
+        for (let i = 0; i < boxes.length; i++)
+          for (let j = i + 1; j < boxes.length; j++) {
+            const a = boxes[i], c = boxes[j];
+            if (a.left < c.right + 2 && c.left < a.right + 2 && a.top < c.bottom + 2 && c.top < a.bottom + 2) return true;
+          }
+        return false;
+      };
+      // Full nodes (disc + name + stars) -> names without stars -> discs only, using
+      // the real measured boxes; the card always shows the full details.
+      let f = fit(110, 56);
+      apply(f, 'full');
+      if (touching()) {
+        f = fit(110, 30);
+        apply(f, 'names');
+        if (touching()) {
+          f = fit(46, 2);
+          apply(f, 'discs');
+        }
+      }
+      const { disc, fw } = f;
+      void disc;
+      const fh = fw * 0.6;
+      frame.style.setProperty('--disc', `${disc}px`);
+      frame.style.width = `${fw}px`;
+      frame.style.height = `${fh}px`;
+      frame.style.left = `${ax + aw / 2 - ((x0 + x1) / 2) * fw}px`;
+      // Card: drop the flavour tagline when space is tight so goals + lock reason always fit.
+      const body = card.querySelector('.card-body') as HTMLElement | null;
+      if (body) {
+        card.classList.remove('tight', 'tighter');
+        if (body.scrollHeight > body.clientHeight + 1) card.classList.add('tight');
+        // Very short screens: goals become a row of star + icon chips (each keeps its label for screen readers).
+        if (body.scrollHeight > body.clientHeight + 1) card.classList.add('tighter');
+      }
+      frame.style.top = `${ay + ah / 2 - ((y0 + y1) / 2) * fh}px`;
+      frame.style.transform = 'none';
+    };
+    this.mapRelayout = () => {
+      if (!s.isConnected) {
+        this.mapRelayout = null;
+        return;
+      }
+      layout();
+    };
     this.setScreen(s);
     const cur = o.cards.find((c) => c.info.id === o.current) ?? o.cards[0];
     select(cur, true);
+    requestAnimationFrame(layout);
   }
 
   showIntro(info: StageInfo, objectives: ObjectiveDef[], colors: [string, string], onGo: Fn): { ready: () => void } {
@@ -285,7 +421,11 @@ export class UI {
         this.onStarShown?.(i);
       }, 600 + i * 450);
     });
-    window.setTimeout(() => ((s.querySelector('[data-a=next]') ?? s.querySelector('[data-a=map]')) as HTMLElement | null)?.focus(), 500);
+    window.setTimeout(() => {
+      ((s.querySelector('[data-a=next]') ?? s.querySelector('[data-a=map]')) as HTMLElement | null)?.focus({ preventScroll: true });
+      const panel = s.querySelector('.res-panel') as HTMLElement | null;
+      if (panel) panel.scrollTop = 0;
+    }, 500);
   }
 
   onStarShown: ((i: number) => void) | null = null;
@@ -302,6 +442,7 @@ export class UI {
   }
 
   showEnding(onDone: Fn): void {
+    this.setHudVisible(false);
     const s = el('div', 'screen ending');
     s.innerHTML = `<h1>${icon('trophy').replace('<svg', '<svg style="width:1em;height:1em;vertical-align:-0.12em;color:var(--butter)"')} You did it!</h1><p>Ace visited every world and made so many new friends. Thanks for playing!</p><button class="btn primary big">${icon('map')} Back to the map</button>`;
     s.querySelector('button')!.addEventListener('click', onDone);
@@ -837,11 +978,11 @@ function mapArt(cards: StageCardData[]): string {
   }).join('');
   return `<svg class="mapart" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
   <defs>
-    <radialGradient id="sea" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#cfe3df"/><stop offset="1" stop-color="#a9cbcd"/></radialGradient>
+    <radialGradient id="sea" gradientUnits="userSpaceOnUse" cx="500" cy="270" r="720"><stop offset="0" stop-color="#cfe3df"/><stop offset="1" stop-color="#a9cbcd"/></radialGradient>
     <radialGradient id="deep" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#2f4d63"/><stop offset=".7" stop-color="#5d8496"/><stop offset="1" stop-color="#a9cbcd" stop-opacity="0"/></radialGradient>
     <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#1c282e" flood-opacity=".18"/></filter>
   </defs>
-  <rect width="1000" height="600" fill="url(#sea)"/>
+  <rect x="-3000" y="-3000" width="7000" height="6600" fill="url(#sea)"/>
   ${waves}
   <!-- Bubble Park -->
   <g filter="url(#soft)"><path d="M70 470c10-60 90-90 160-80s110 50 100 100-70 80-150 75S60 530 70 470z" fill="#b8cf98"/><path d="M95 475c15-40 80-60 135-52s85 35 80 70-60 55-120 50-105-30-95-68z" fill="#a6c487"/>

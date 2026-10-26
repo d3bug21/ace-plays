@@ -7,9 +7,7 @@ sharks do a barrel roll, and targets pop into soft sparkles.
 
 ### ▶ [Play in your browser](https://ace-plays.tamarikigames.com)
 
-Part of [Tamariki Games](https://tamarikigames.com/games/ace-plays/).
-
-Works on computers, tablets and phones (turn your phone sideways for the best view). Prefer a desktop app? Grab one from the [latest release](https://github.com/d3bug21/ace-plays/releases/latest).
+Part of [Tamariki Games](https://tamarikigames.com/games/ace-plays/). Works on computers, tablets and phones (turn your phone sideways for the best view). Prefer a desktop app? Grab one from the [latest release](https://github.com/d3bug21/ace-plays/releases/latest).
 
 ![Ace Plays! title screen](docs/screenshots/title.png)
 
@@ -52,7 +50,8 @@ blasters: the **Bubble Wand**, **Boing Ball**, **Fizz Fountain** and **Glow Ball
 **On phones and tablets:** turn your device sideways for the best view. A friendly reminder pops
 up in portrait, and you can tap **Play anyway**. Drag on the left side to walk and drag on the right
 side to look. Hold the bubble button and slide your thumb to aim while you blow bubbles. Push it
-to the edge to keep turning. Tap 1-4 in the bottom bar (or the swap button) to change blasters. Tap the goals
+to the edge to keep turning. Tap 1-4 in the bottom bar (or the swap button) to change blasters. On the Adventure Map, tap
+a world or use the arrows on its card to pick where Ace goes next. Tap the goals
 card to see all your goals. You can also add Ace Plays! to your home screen: it launches full
 screen like an app, and once loaded it keeps working offline.
 
@@ -76,8 +75,8 @@ You can open it with any static file server. It also works as the desktop app's 
 
 ### Web version
 
-The browser version is hosted on Cloudflare Workers (static assets). `wrangler.jsonc` points
-at `dist/`, so publishing an update is:
+The browser version is hosted on Cloudflare Workers (static assets) at
+`ace-plays.tamarikigames.com`. `wrangler.jsonc` points at `dist/`, so publishing an update is:
 
 ```bash
 ELECTRON_SKIP_BINARY_DOWNLOAD=1 npm ci
@@ -97,9 +96,9 @@ Packages are written to `release/`:
 
 | OS | Files |
 | --- | --- |
-| macOS | `AcePlays-1.0.1-mac-arm64.dmg`, `AcePlays-1.0.1-mac-x64.dmg`, `AcePlays-1.0.1-mac-arm64.zip` |
-| Windows | `AcePlays-1.0.1-win-x64.exe` (installer), `AcePlays-1.0.1-win-x64.zip` (portable) |
-| Linux | `AcePlays-1.0.1-linux-x86_64.AppImage`, `AcePlays-1.0.1-linux-x64.tar.gz` |
+| macOS | `AcePlays-1.0.2-mac-arm64.dmg`, `AcePlays-1.0.2-mac-x64.dmg`, `AcePlays-1.0.2-mac-arm64.zip` |
+| Windows | `AcePlays-1.0.2-win-x64.exe` (installer), `AcePlays-1.0.2-win-x64.zip` (portable) |
+| Linux | `AcePlays-1.0.2-linux-x86_64.AppImage`, `AcePlays-1.0.2-linux-x64.tar.gz` |
 
 `release/SHA256SUMS` lists checksums for every package. These are unsigned local builds. On macOS, right-click the app and choose **Open** the first
 time. On Linux, make the AppImage executable (`chmod +x`) before running it. Building Windows

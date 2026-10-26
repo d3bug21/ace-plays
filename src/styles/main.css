@@ -641,3 +641,85 @@ body.touch.landscape.vh-tiny .hud .msg.kind-banner span { display: none; }
 .inapp-tip.corner-tip svg { width: 18px; height: 18px; margin-top: 2px; }
 .inapp-tip.corner-tip .icon-btn { width: 30px; height: 30px; }
 #ui .inapp-tip.corner-tip.in-flow { position: static; transform: none; width: min(340px, calc(var(--app-w) - 24px)); margin-bottom: 4px; }
+
+/* ------------------------------------------------------------ v1.0.2 map: fitted frame + side/bottom card */
+.map { background: #b4d2d2; }
+.map .map-frame { position: absolute; overflow: visible; }
+.map .map-frame svg.mapart { overflow: visible; }
+.safe-probe { position: absolute; width: 0; height: 0; visibility: hidden; pointer-events: none; padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
+.map .map-top { left: max(12px, env(safe-area-inset-left)); right: max(12px, env(safe-area-inset-right)); top: max(10px, env(safe-area-inset-top)); z-index: 3; }
+.map-top-right { display: flex; gap: 10px; align-items: center; }
+.map-node { z-index: 2; }
+.map-node .disc { width: var(--disc, clamp(64px, 8vw, 88px)); height: var(--disc, clamp(64px, 8vw, 88px)); border-width: max(3px, calc(var(--disc, 80px) * 0.06)); }
+.map-node .label { font-size: clamp(0.78rem, calc(var(--disc, 80px) * 0.2), 1.05rem); padding: 3px 10px; }
+.map-node .stars svg { width: clamp(14px, calc(var(--disc, 80px) * 0.22), 18px); height: clamp(14px, calc(var(--disc, 80px) * 0.22), 18px); }
+.map .ace-token { width: calc(var(--disc, 80px) * 0.62); height: calc(var(--disc, 80px) * 0.62); }
+.stage-card { position: absolute; transform: none; opacity: 0; display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; z-index: 4; overflow: hidden; }
+.stage-card.show { opacity: 1; transform: none; }
+.stage-card .card-head { display: flex; align-items: center; gap: 8px; }
+.stage-card .card-head h2 { flex: 1; min-width: 0; margin: 0; font-size: clamp(1.15rem, calc(var(--app-h) * 0.05), 1.7rem); justify-content: center; text-align: center; }
+.stage-card .card-head h2 svg { width: 1.2em; height: 1.2em; flex: none; }
+.stage-card .card-nav { width: 44px; height: 44px; flex: none; box-shadow: 0 2px 0 rgba(44, 59, 67, 0.14); background: var(--cream-2); }
+.stage-card .card-nav svg { width: 22px; height: 22px; }
+.stage-card .card-nav.next svg { transform: scaleX(-1); }
+.stage-card .card-body { overflow-y: auto; min-height: 0; flex: 1 1 auto; display: flex; flex-direction: column; gap: 8px; }
+.stage-card p { font-size: clamp(0.86rem, calc(var(--app-h) * 0.03), 1.05rem); }
+.stage-card li { font-size: clamp(0.84rem, calc(var(--app-h) * 0.028), 1rem); }
+.stage-card .li-ic { width: 18px; height: 18px; vertical-align: -4px; margin-right: 6px; }
+.stage-card .card-actions { position: static; margin: 0; padding: 0; background: none; display: flex; justify-content: center; flex: none; }
+.stage-card .card-actions .btn { width: 100%; min-height: 46px; }
+/* Scrolling a control into view keeps it clear of the pinned action row. */
+.modal { scroll-padding-bottom: 84px; scroll-padding-top: 8px; }
+.results .res-panel { scroll-padding-bottom: 90px; }
+.stage-card .card-body { scroll-padding-bottom: 8px; }
+/* Transitions never block input (the generic "#ui > *" rule made the wipe hit-testable). */
+#ui > .wipe, #ui > .wipe * { pointer-events: none !important; }
+/* Narrow map header: everything stays on-screen. */
+.map .map-title .mt-short { display: none; }
+@media (max-width: 520px) {
+  .map .map-title { font-size: 1.05rem; padding: 6px 12px; gap: 6px; }
+  .map .map-title svg { width: 22px; height: 22px; }
+  .map .map-title .mt-long { display: none; }
+  .map .map-title .mt-short { display: inline; }
+  .map .star-total { font-size: 1rem; padding: 6px 10px; white-space: nowrap; }
+  .map .star-total svg { width: 20px; height: 20px; }
+  .map .map-top .icon-btn { width: 44px; height: 44px; }
+  .map-top-right { gap: 6px; }
+}
+.map .star-total { white-space: nowrap; }
+.map .map-title { white-space: nowrap; }
+/* Crowded map (very small free area): discs only; names/stars live in the card. */
+.map-frame.compact-nodes .map-node .label, .map-frame.compact-nodes .map-node .stars { display: none; }
+/* Short landscape: the message slot fits whole hints (no meaning-hiding clamp). */
+body.touch.landscape.vh-short:not(.vh-tiny) .hud .msg { font-size: 0.86rem; max-width: max(250px, calc(var(--app-w) - 360px)); padding: 6px 12px; }
+body.touch.landscape.vh-short:not(.vh-tiny) .hud .msg span { -webkit-line-clamp: 4; line-clamp: 4; }
+/* v1.0.2 critic fixes */
+.stage-card.tight .tagline { display: none; }
+.stage-card.tight .card-body { gap: 4px; }
+.stage-card.tight li { font-size: 0.82rem; }
+.stage-card .lock-note { padding: 7px 10px; font-size: 0.86rem; flex: none; }
+.screen.title > .inapp-tip.corner-tip { position: absolute; z-index: 2; }
+.title .corner .btn.ghost { background: rgba(251, 246, 236, 0.92); color: var(--ink); border-color: transparent; box-shadow: 0 3px 0 rgba(44, 59, 67, 0.14); }
+/* Unlock toast on touch: compact card near the top, clear of the crosshair. */
+body.touch .toast-unlock { top: calc(max(10px, env(safe-area-inset-top)) + 52px); width: min(440px, calc(var(--app-w) - 24px)); padding: 10px 14px; gap: 12px; z-index: 4; }
+body.touch .toast-unlock svg { width: 40px; height: 40px; flex: none; }
+body.touch .toast-unlock h3 { font-size: 1.05rem !important; }
+body.touch .toast-unlock p { font-size: 0.85rem !important; margin-top: 2px !important; }
+body.touch.portrait .toast-unlock { top: calc(max(10px, env(safe-area-inset-top)) + 150px); }
+.stage-card.tighter { padding: 8px 10px; gap: 6px; }
+.stage-card.tighter ul { display: flex; gap: 12px; flex-wrap: wrap; }
+.stage-card.tighter li { gap: 2px; }
+.stage-card.tighter li > span { font-size: 0; }
+.stage-card.tighter li > span .li-ic { margin-right: 0; }
+.stage-card.tighter .lock-note { padding: 5px 8px; font-size: 0.8rem; }
+.stage-card.tighter .card-head h2 { font-size: 1.05rem; }
+body.touch.landscape.vh-tiny .toast-unlock { left: max(10px, env(safe-area-inset-left)); transform: none; width: min(270px, 40vw); top: calc(max(10px, env(safe-area-inset-top)) + 50px); padding: 8px 10px; gap: 8px; animation: none; }
+body.touch.landscape.vh-tiny .toast-unlock svg { width: 32px; height: 32px; }
+body.touch.landscape.vh-tiny .toast-unlock h3 { font-size: 0.9rem !important; }
+body.touch.landscape.vh-tiny .toast-unlock p { font-size: 0.76rem !important; }
+.stage-card.tighter { gap: 4px; padding: 6px 10px; }
+.stage-card.tighter .card-body { gap: 3px; }
+.stage-card.tighter .lock-note { font-size: 0.74rem; line-height: 1.2; padding: 4px 8px; gap: 6px; }
+.stage-card.tighter .lock-note svg { width: 16px; height: 16px; }
+.stage-card.tighter .card-actions .btn { min-height: 44px; padding-top: 0.3em; padding-bottom: 0.3em; }
+.map-frame.names-only .map-node .stars { display: none; }

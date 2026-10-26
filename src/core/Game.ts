@@ -331,6 +331,7 @@ export class Game {
     this.camera.updateProjectionMatrix();
     this.menu.resize(w, h);
     this.fx.setViewport(h * this.renderer.getPixelRatio(), this.camera.fov);
+    this.ui?.relayout();
   }
 
   // --------------------------------------------------------------- flow
@@ -394,11 +395,15 @@ export class Game {
     });
     // Portrait: a browser tip sits in the title's button column (above Play) so it can
     // never cover the logo, Ace or the buttons. Landscape keeps the small corner card.
-    const tip = this.uiRoot.querySelector('.inapp-tip');
-    const col = this.uiRoot.querySelector('.title .title-buttons');
-    if (tip && col && document.body.classList.contains('portrait')) {
-      tip.classList.add('in-flow');
-      col.prepend(tip);
+    // Tips belong to the title screen: they leave with it and sit below modals.
+    const tip = this.uiRoot.querySelector(':scope > .inapp-tip');
+    const titleScreen = this.uiRoot.querySelector('.screen.title');
+    const col = titleScreen?.querySelector('.title-buttons');
+    if (tip && titleScreen && col) {
+      if (document.body.classList.contains('portrait')) {
+        tip.classList.add('in-flow');
+        col.prepend(tip);
+      } else titleScreen.appendChild(tip);
     }
   }
 
